@@ -1,59 +1,78 @@
 <?php
 if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
 ?>
-<nav class="navbar navbar-default">
-    <div class="container-fluid">
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
-                <span class="sr-only">Intercambiar navegación</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a class="navbar-brand" href="#" id="marca_del_producto"><?php echo NOMBRE_NEGOCIO ?></a>
+<header class="main-header">
+    <a href="#" id="marca_del_producto" class="logo"><?php echo NOMBRE_NEGOCIO ?></a>
+    <!-- Header Navbar: style can be found in header.less -->
+    <nav class="navbar navbar-static-top" role="navigation">
+        <!-- Sidebar toggle button-->
+        <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        </a>
+        <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+            
+            <!-- Cierre de Sesión -->
+            <li>
+                <a href="./modulos/usuarios/cerrar_sesion.php">Cerrar Sesión</a>
+            </li>
+        </ul>
         </div>
-        <div id="navbar" class="navbar-collapse collapse">
-            <ul class="nav navbar-nav">
-                <li id="elem_ventas"><a href="./ventas"><i class="fa fa-usd"></i> Ventas</a></li>
-                <li id="elem_inventarios"><a href="./inventarios"><i class="fa fa-book"></i> Inventarios</a></li>
-                <li id="elem_caja"><a href="./caja"><i class="fa fa-money"></i> Caja</a></li>
-                <li id="elem_gastos"><a href="./gastos"><i class="fa fa-calculator"></i> Gastos</a></li>
-                <li id="elem_alta_inventarios"><a href="./alta-de-inventarios"><i class="fa fa-angle-double-up"></i>
-                        Alta de inventarios</a></li>
-                <li id="elem_reportes" class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-file-pdf-o"></i> Reportes <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="./reportes-inventarios">Inventarios</a></li>
-                        <li><a href="./reportes-bajas-inventario">Bajas de inventario</a></li>
-                        <li><a href="./reportes-caja">Caja</a></li>
-                        <li><a href="./reportes-ventas">Ventas</a></li>
-                        <li><a href="./reportes-gastos">Gastos</a></li>
-                        <li><a href="./productos-en-stock">Productos en stock</a></li>
-                    </ul>
-                </li>
-            </ul>
-            <ul class="nav navbar-nav navbar-right">
-                <li id="elem_ajustes" class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-cog"></i> Ajustes <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="./ajustes"><i class="fa fa-cogs"></i> Generales</a></li>
-                        <li><a href="./usuarios"><i class="fa fa-user"></i> Usuarios</a></li>
-                    </ul>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><?php inicia_sesion_segura();
-                                                                                                                                        echo $_SESSION["nombre_de_usuario"] . " ";
-                                                                                                                                        echo (intval($_SESSION["administrador"]) === 1) ? '<i class="fa fa-unlock"></i>' : '<i class="fa fa-lock"></i>'; ?>
-                        <span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a id="ajustes" href="./modulos/usuarios/cerrar_sesion.php"><i class="fa fa-sign-out"></i>
-                                Cerrar sesión</a></li>
-                    </ul>
-                </li>
-            </ul>
+    </nav>
+</header>
+<!-- Left side column. contains the sidebar -->
+<aside class="main-sidebar">
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+        <!-- Sidebar user panel -->
+        <div class="user-panel">
+        <div class="pull-left image">
+            <img src="./public//dist/img/avataroficina1.jpg" class="img-circle" alt="User Image" />
         </div>
-    </div>
-</nav>
+        <div class="pull-left info">
+
+        </div>
+        </div>
+        <!-- sidebar menu: : style can be found in sidebar.less -->
+        <ul class="sidebar-menu">
+        <li class="header">MENÚ DE NAVEGACIÓN </li>
+        <li class="treeview">
+            <a href="./ventas"><i class="fa fa-usd"></i> Ventas</a>
+        </li>
+        <li class="treeview">
+            <a href="./inventarios"><i class="fa fa-cubes"></i> Inventarios</a>
+        </li>
+        <li class="treeview">
+            <a href="./caja"><i class="fa fa-money"></i> Caja</a>
+        </li>
+        <li class="treeview">
+            <a href="./gastos"><i class="fa fa-calculator"></i> Gastos</a>
+        </li>
+        <li class="treeview">
+            <a href="./alta-de-inventarios"><i class="fa fa-angle-double-up"></i> Alta de inventarios</a>
+        </li>
+        <li class="treeview">
+            <a href="#">
+            <i class="fa fa-file-pdf-o"></i>
+            <span>Reportes</span>
+            <i class="fa fa-angle-left pull-right"></i>
+            </a>
+            <ul class="treeview-menu">
+            <li><a href="./reportes-inventarios">Inventarios</a></li>
+            <li><a href="./reportes-bajas-inventario">Bajas de inventario</a></li>
+            <li><a href="./reportes-caja">Caja</a></li>
+            <li><a href="./reportes-ventas">Ventas</a></li>
+            <li><a href="./reportes-gastos">Gastos</a></li>
+            <li><a href="./productos-en-stock">Productos en stock</a></li>
+            </ul>
+        </li>
+        </ul>
+    </section>
+    <!-- /.sidebar -->
+</aside>
 <script>
     $(document).ready(function() {
         comprobar_productos_con_existencia_minima();

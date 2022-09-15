@@ -159,7 +159,7 @@ function dibujar_productos() {
             .html(
                 $("<h2>")
                     .addClass('text-center')
-                    .html('Aquí aparecerán los productos que agregues<br><i class = "fa fa-4x fa-cart-plus"></i>')
+                    .html('Agrega productos al carrito<br><i class = "fa fa-4x fa-cart-plus"></i>')
             );
         $("#contenedor_total").parent().hide();
         return;

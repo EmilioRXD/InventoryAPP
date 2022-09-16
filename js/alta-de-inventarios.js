@@ -129,7 +129,7 @@ function dibujar_productos() {
             .html(
                 $("<h2>")
                     .addClass('text-center')
-                    .html('Aquí aparecerán los productos que agregues<br><i class = "fa fa-4x fa-shopping-basket"></i>')
+                    .html('Aquí aparecerán los productos que agregues<br><i class = "fa fa-4x fa-plus"></i>')
             );
         $("#contenedor_total").parent().hide();
         return;

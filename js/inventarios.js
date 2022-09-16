@@ -519,58 +519,49 @@ function dibujar_todos_los_productos(productos) {
             .append(
                 $('<tr>')
                     .append(
-                        $('<td>').html(codigo),
+                        $('<td class="text-center">').html(codigo),
                         $('<td style="word-wrap: break-word; white-space: normal;">').html(nombre),
-                        $('<td>').html("$" + productos[i].precio_compra),
-                        $('<td>').html("$" + productos[i].precio_venta),
-                        $('<td>').html("$" + productos[i].utilidad),
-                        $('<td>').html(productos[i].existencia),
-                        $('<td>').html(productos[i].stock),
-                        $('<td>').html(productos[i].familia),
+                        $('<td class="text-center">').html("$" + productos[i].precio_compra),
+                        $('<td class="text-center">').html("$" + productos[i].precio_venta),
+                        $('<td class="text-center">').html("$" + productos[i].utilidad),
+                        $('<td class="text-center">').html(productos[i].existencia),
+                        $('<td class="text-center">').html(productos[i].stock),
+                        $('<td class="text-center">').html(productos[i].familia),
                         $('<td>')
                             .append(
-                                $("<button data-toggle='tooltip'>")
-                                    .addClass('btn btn-default')
-                                    .html("<i class='fa fa-ellipsis-v'></i>")
-                                    .tooltip({
-                                        trigger: "manual",
-                                        html: true,
-                                        placement: "right",
-                                        title: $("<div>")
-                                            .addClass('btn-group')
-                                            .append(
-                                                $("<button data-id = '" + productos[i].rowid + "'>")
-                                                    .addClass('eliminar btn btn-danger')
-                                                    .html(
-                                                        $("<i>")
-                                                            .addClass('fa fa-trash')
-                                                    )
+                                $("<div class='col text-center' style='padding: 0;'>")
+                                    .append(
+                                        $("<button data-id = '" + productos[i].rowid + "'>")
+                                            .addClass('eliminar btn-ms btn-danger')
+                                            .html(
+                                                $("<i>")
+                                                    .addClass('fa fa-trash')
                                             )
-                                            .append(
-                                                $("<button data-id = '" + productos[i].rowid + "'>")
-                                                    .addClass('editar btn btn-warning')
-                                                    .html(
-                                                        $("<i>")
-                                                            .addClass('fa fa-pencil')
-                                                    )
+                                    )
+                                    .append(
+                                        $("<button data-id = '" + productos[i].rowid + "'>")
+                                            .addClass('editar btn-ms btn-warning')
+                                            .html(
+                                                $("<i>")
+                                                    .addClass('fa fa-pencil')
                                             )
-                                            .append(
-                                                $("<button data-id = '" + productos[i].rowid + "'>")
-                                                    .addClass('agregar-piezas btn btn-success')
-                                                    .html(
-                                                        $("<i>")
-                                                            .addClass('fa fa-plus-circle')
-                                                    )
+                                    )
+                                    .append(
+                                        $("<button data-id = '" + productos[i].rowid + "'>")
+                                            .addClass('agregar-piezas btn-ms btn-success')
+                                            .html(
+                                                $("<i>")
+                                                    .addClass('fa fa-plus-circle')
                                             )
-                                            .append(
-                                                $("<button data-id = '" + productos[i].rowid + "'>")
-                                                    .addClass('dar-baja btn btn-info')
-                                                    .html(
-                                                        $("<i>")
-                                                            .addClass('fa fa-minus-circle')
-                                                    )
+                                    )
+                                    .append(
+                                        $("<button data-id = '" + productos[i].rowid + "'>")
+                                            .addClass('dar-baja btn-ms btn-info')
+                                            .html(
+                                                $("<i>")
+                                                    .addClass('fa fa-minus-circle')
                                             )
-                                    })
+                                    )
                             )
                     )
             );

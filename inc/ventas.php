@@ -2,11 +2,12 @@
     <div class="wrapper">
     
     <!-- Right side column. Contains the navbar and content of the page -->
-    <div class="content-wrapper">
+    <div class="content-wrapper" style="margin: 0;">
             <!-- Main content -->
             <section class="content">
                 <div class="row">
-                    <div class="col-xs-12">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8">
                         <div class="box box-primary">
                             <div class="box-header with-border">
                                 
@@ -60,6 +61,7 @@
                             </div><!-- /.box-body -->
                         </div><!-- /.box -->
                     </div><!-- /.col -->
+                    <div class="col-sm-2"></div>
                     <!-- /left column -->
 
                 </div><!-- /.row -->

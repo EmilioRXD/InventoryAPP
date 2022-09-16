@@ -33,6 +33,7 @@ function consultar_valor_del_inventario() {
 function escuchar_elementos() {
 
     $("#generar_reporte").click(function () {
+        $("#quitar").removeClass("content-wrapper");
         $("#fecha_hoy").html(dame_fecha());
         window.print();
     });

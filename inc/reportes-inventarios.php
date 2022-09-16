@@ -15,8 +15,7 @@
             <!-- Main content -->
             <section class="content">
                 <div class="row">
-                    <div class="col-sm-2"></div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-12">
                         <div class="box box-primary">
                             <div class="box-header with-border hidden-print ">
                                 <p class="h5 text-center">
@@ -25,7 +24,7 @@
                                 </p>
                             </div><!-- /.box-header -->
                             <div class="box-body">
-                                <div class="form-group hidden-print">
+                                <div class="col-sm-6 form-group hidden-print">
                                     <label for="filtro">Ordenar por</label>
                                     <select class="form-control" name="filtro" id="filtro">
                                         <option value="codigo">Código</option>
@@ -37,7 +36,7 @@
                                         <option value="familia">Familia</option>
                                     </select>
                                 </div>
-                                <div class="form-group hidden-print">
+                                <div class="col-sm-6 form-group hidden-print">
                                     <label for="orden">Orden</label>
                                     <select class="form-control" name="orden" id="orden">
                                         <option value="desc">Ascendente</option>
@@ -67,7 +66,6 @@
                             </div><!-- /.box-body -->
                         </div><!-- /.box -->
                     </div><!-- /.col -->
-                    <div class="col-sm-2"></div>
                     <!-- /left column -->
 
                 </div><!-- /.row -->

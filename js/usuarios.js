@@ -229,13 +229,9 @@ function dibuja_tabla_usuarios(respuesta) {
                         $("<td>")
                             .html(respuesta[i].nombre),
                         $("<td>")
-                            .html(( respuesta[i].administrador == 1 ) ? '<i class="fa fa-unlock"></i>' : '<i class="fa fa-lock"></i>'),
-                        $("<td>")
-                            .html('<button data-rowid = "' + respuesta[i].rowid + '" class="btn btn-danger eliminar-usuario"><i class="fa fa-remove"></i></button>'),
-                        $("<td>")
-                            .html('<button class="btn btn-warning"><i class="fa fa-edit"></i></button>'),
-                        $("<td>")
-                            .html('<button data-user-name="' + respuesta[i].nombre + '" data-rowid-user = "' + respuesta[i].rowid + '" class="btn btn-success change-password"><i class="fa fa-key"></i></button>')
+                            .html(( respuesta[i].administrador == 1 ) ? 'Administrador <i class="fa fa-unlock"></i>' : 'Cajero <i class="fa fa-lock"></i>'),
+                        $("<td class='text-center'>")
+                            .html('<button style="margin:0 .5em;" data-rowid = "' + respuesta[i].rowid + '" class="btn btn-danger eliminar-usuario"><i class="fa fa-remove"></i> Eliiminar</button><button style="margin:0 .5em;" data-user-name="' + respuesta[i].nombre + '" data-rowid-user = "' + respuesta[i].rowid + '" class="btn btn-success change-password"><i class="fa fa-key"></i> Cambiar Contraseña</button>')
                     )
             );
 

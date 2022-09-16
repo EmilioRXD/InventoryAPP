@@ -4,8 +4,8 @@
 <?php
 if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
 ?>
-<?php if ($_SESSION["administrador"] !== 1) exit('<h1 class="text-center">Lo sentimos, solamente el administrador puede ver esta sección<br><br><i class="fa fa-hand-paper-o fa-4x"></i></h1>'); ?>    
-        
+<?php if ($_SESSION["administrador"] !== 1) exit('<h1 class="text-center">Lo sentimos, solamente el administrador puede ver esta sección<br><br><i class="fa fa-hand-paper-o fa-4x"></i></h1>'); ?>
+
         <!-- Right side column. Contains the navbar and content of the page -->
         <div class="content-wrapper" style="margin: 0;">
             <!-- Main content -->

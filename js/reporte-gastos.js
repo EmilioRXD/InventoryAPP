@@ -22,6 +22,7 @@ function escuchar_elementos(){
 	});
 
 	$("#generar_reporte").click(function(){
+		$("#quitar").removeClass("content-wrapper");
 		window.print();
 	});
 }

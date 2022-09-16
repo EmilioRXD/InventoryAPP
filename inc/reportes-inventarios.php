@@ -19,7 +19,8 @@
                     <div class="col-sm-8">
                         <div class="box box-primary">
                             <div class="box-header with-border hidden-print ">
-                                <p class="h5 text-justify">Elige el lapso de tiempo en el que quieres que se genere el reporte. Lo que veas aquí
+                                <p class="h5 text-center">
+                                    Elige el lapso de tiempo en el que quieres que se genere el reporte. Lo que veas aquí
                                     es lo mismo que aparecerá en él.
                                 </p>
                             </div><!-- /.box-header -->

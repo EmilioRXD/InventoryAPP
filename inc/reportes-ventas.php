@@ -51,7 +51,7 @@
                                     <h2 class="text-center" hidden="hidden"><strong>Utilidad:</strong> $<span id="mostrar_utilidad"></span></h2>
                                 </div>
                             </div><!-- /.box-header -->
-                            <div class="box-body" style="min-height:10em;">
+                            <div class="box-body" style="min-height:40vh;">
                                 <div class="table-responsive col-sm-3">
                                     <h3 class="text-center">Por familia</h3>
                                     <table class="table table-condensed table-bordered table-hover">

@@ -53,9 +53,6 @@ function dibuja_tabla_caja(datos){
 					.html('Descripción'),
 					
 					$( "<th>" )
-					.html('Número de remisión'),
-					
-					$( "<th>" )
 					.html('Fecha'),
 					
 					$( "<th>" )
@@ -74,10 +71,9 @@ function dibuja_tabla_caja(datos){
 		.append( 
 			$("<tr>")
 			.append(
-				$("<td>").html(datos[i].importe),
+				$("<td>").html("$" + datos[i].importe),
 				$("<td>").html(datos[i].concepto),
 				$("<td>").html(datos[i].descripcion),
-				$("<td>").html(datos[i].no_remision),
 				$("<td>").html(datos[i].fecha),
 				$("<td>").html(datos[i].usuario)
 			)

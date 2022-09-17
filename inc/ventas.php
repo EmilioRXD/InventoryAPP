@@ -67,7 +67,6 @@
                 </div><!-- /.row -->
             </section><!-- /.content -->
         </div>
-    </div>
     <div id="modal_procesar_venta" class="modal fade" role="dialog">
         <div class="modal-dialog">
             <div class="modal-content">
@@ -114,7 +113,7 @@
         </div>
     </div>
 
-    <!-- SCRIPTS -->
+        <!-- SCRIPTS -->
     <!-- jQuery 2.1.3 -->
     <script src="./public/plugins/jQuery/jQuery-2.1.3.min.js"></script>
     <!-- Bootstrap 3.3.2 JS -->
@@ -129,3 +128,5 @@
     <link rel="stylesheet" href="./css/eac.css">
     <script src="./js/ventas.js"></script>
     <script src="./lib/eac.js"></script>
+
+    </div>

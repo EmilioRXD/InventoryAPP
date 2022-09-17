@@ -10,6 +10,7 @@ const NOMBRE_NEGOCIO = "InventoryAPP";
     <title><?php echo NOMBRE_NEGOCIO ?></title>
     <link rel="icon" type="image/png" href="./img/favicon.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+    <link href="./css/pnotify.css" rel="stylesheet">
 
     <!-- SCRIPTS -->
 

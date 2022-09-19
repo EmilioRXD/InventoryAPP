@@ -54,7 +54,7 @@
                                 </div>
                                 <h1 hidden="hidden"><strong>Total: </strong><span id="contenedor_total"></span></h1>
                                 <div class="row">
-                                    <div class="col-xs-12 table-responsive" id="contenedor_tabla">
+                                    <div class="col-xs-12 table-responsive" id="contenedor_tabla" style="border: none;">
 
                                     </div>
                                 </div>

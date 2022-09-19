@@ -19,7 +19,7 @@
                                 <label for="importe">Importe</label>
                                 <input type="text" id="codigo_producto" class="form-control" placeholder="Nombre o código del producto">
                                 <br>
-                                <div class="table-responsive" id="contenedor_tabla">
+                                <div class="table-responsive" id="contenedor_tabla" style="border: none;">
                                 </div>                                    
                             </div><!-- /.box-body -->
                         </div><!-- /.box -->

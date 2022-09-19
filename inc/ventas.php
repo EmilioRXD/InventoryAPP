@@ -12,7 +12,7 @@
                             <div class="box-header with-border">
                                 
                                 <!-- left column -->
-                                <div class="col-sm-4">
+                                <div class="col-sm-4" style="margin-top: .5em">
                                     <button id="quitar_ultimo_producto" type="button" class="btn btn-warning btn-block">
                                         <i class="fa-minus fa visible-xs"></i>
                                         <span class="hidden-xs"><kbd>-</kbd> Quitar último producto</span>
@@ -21,7 +21,7 @@
                                 <!-- /left column -->
 
                                 <!-- center column -->
-                                <div class="col-sm-4">
+                                <div class="col-sm-4" style="margin-top: .5em">
                                     <button id="preparar_venta" type="button" class="btn btn-success btn-block">
                                         <i class="fa-check-circle-o fa visible-xs"></i>
                                         <span class="hidden-xs"><kbd>F1</kbd> Realizar venta</span>
@@ -30,7 +30,7 @@
                                 <!-- /center column -->
 
                                 <!-- right column -->
-                                <div class="col-sm-4">
+                                <div class="col-sm-4" style="margin-top: .5em">
                                     <button id="cancelar_toda_la_venta" type="button" class="btn btn-danger btn-block">
                                         <i class="fa-ban fa visible-xs"></i>
                                         <span class="hidden-xs"><kbd>F2</kbd> Cancelar toda la venta</span>
@@ -78,13 +78,13 @@
                     <h2 hidden="hidden"><strong>Total: </strong><span id="contenedor_total_modal"></span></h2>
                     <div class="row">
                         <div class="form-group">
-                            <div class="col-xs-12 col-md-10">
+                            <div class="col-xs-12">
                                 <label for="pago_usuario">El cliente paga con...</label>
                                 <input placeholder="El cliente paga con..." type="number" id="pago_usuario"
                                     class="form-control">
                             </div>
                         </div>
-                        <div class="col-xs-12 col-md-2">
+                        <div class="col-xs-12 col-md-2 hidden">
                             <div class="checkbox checkbox-primary checkbox-circle">
                                 <input type="checkbox" id="imprimir_ticket">
                                 <label for="imprimir_ticket">

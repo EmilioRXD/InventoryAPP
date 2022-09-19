@@ -82,8 +82,8 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
                                 </div>
                             </div><!-- /.box-header -->
                             <div class="box-body">
-                                <div class="table-responsive">
-                                    <table class="table table-striped table-hover table-bordered table-condensed">
+                                <div class="">
+                                    <table id="TABLEONE" class="table table-bordered table-striped">
                                         <thead>
                                         <tr>
                                             <th class="text-center">Código</th>
@@ -100,18 +100,7 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
                                         <tbody id="cuerpo_tabla_productos">
                                         </tbody>
                                     </table>
-                                </div>
-                                <div class="btn-group btn-group-justified">
-                                    <div class="btn-group">
-                                        <button id="cargar_productos_nuevos" type="button" class="btn btn-success"><i
-                                                class="fa fa-arrow-left"></i> Productos nuevos
-                                        </button>
-                                    </div>
-                                    <div class="btn-group">
-                                        <button id="cargar_productos_antiguos" type="button" class="btn btn-info">Productos
-                                            anteriores <i class="fa fa-arrow-right"></i></button>
-                                    </div>
-                                </div>                                
+                                </div>                             
                             </div><!-- /.box-body -->
                         </div><!-- /.box -->
                     </div>
@@ -240,6 +229,7 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
 
 <script type="text/javascript" src="./js/inventarios.js"></script>
 <script type="text/javascript" src="./lib/np.js"></script>
+
 <script>
 
     // Show the progress bar 
@@ -259,6 +249,26 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
     // Trigger bar when exiting the page
     jQuery(window).unload(function () {
         NProgress.start();
+    });
+
+</script>
+
+<!-- DATA TABES SCRIPT -->
+<script src="./public/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
+<script src="./public/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
+
+<script type="text/javascript">
+
+    $(function () {
+    $("#example1").dataTable();
+    $('#TABLEONE').dataTable({
+        "bPaginate": true,
+        "bLengthChange": true,
+        "bFilter": false,
+        "bSort": true,
+        "bInfo": true,
+        "bAutoWidth": false
+    });
     });
 
 </script>

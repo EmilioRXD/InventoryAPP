@@ -622,6 +622,7 @@ function insertar_producto() {
             .scrollTop(0);
             $("#contenedor_formulario").addClass("hidden");
             $("#inventory").removeClass("hidden");
+            $("#alertsuccess").removeClass("hidden");
         deshabilitar_para_transaccion();
         $.post(ruta, {datos_producto: datos_producto}, function (data, textStatus, xhr) {
             habilitar_para_transaccion();

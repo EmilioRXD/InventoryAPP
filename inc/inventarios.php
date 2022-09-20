@@ -91,6 +91,11 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
                                 </div>
                             </div><!-- /.box-header -->
                             <div class="box-body">
+                                <div class="alert alert-success alert-dismissable hidden" id="alertsuccess">
+                                    <button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+                                    <h4><i class="icon fa fa-check"></i> Alert!</h4>
+                                    Producto agregado satisfactoriamente
+                                </div>
                                 <div class="table-responsive">
                                     <table id="TABLEONE" class="table table-bordered table-striped">
                                         <thead>

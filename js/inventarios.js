@@ -261,8 +261,9 @@ function escuchar_elementos() {
         esta_editando = false;
         limpiar_formulario("div#contenedor_formulario");
         $("#buscar_producto").focus();
-        $(this).parent().hide();
         $("#mostrar_resultados").parent().hide();
+        $("#contenedor_formulario").addClass("hidden");
+        $("#inventory").removeClass("hidden");
     });
 
     $(document).on("click", ".editar", function (evento) {
@@ -330,6 +331,11 @@ function escuchar_elementos() {
 
     $("#guardar_producto").click(function (evento) {
         insertar_producto();
+    });
+
+    $("#agregar_producto").click(function (evento) {
+        $("#contenedor_formulario").removeClass("hidden");
+        $("#inventory").addClass("hidden");
     });
 
     $("#precio_venta, #precio_compra").keyup(function (evento) {
@@ -614,6 +620,8 @@ function insertar_producto() {
             .addClass('alert-warning')
             .show("slow")
             .scrollTop(0);
+            $("#contenedor_formulario").addClass("hidden");
+            $("#inventory").removeClass("hidden");
         deshabilitar_para_transaccion();
         $.post(ruta, {datos_producto: datos_producto}, function (data, textStatus, xhr) {
             habilitar_para_transaccion();

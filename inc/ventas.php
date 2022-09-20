@@ -40,7 +40,7 @@
                             
                             </div><!-- /.box-header -->
                             <div class="box-body">
-                                <div class="form-group mb-2">
+                                <div class="form-group">
                                     <label class="col-form-label" for="codigo_producto">
                                         <i class="fa fa-barcode fs-6"></i>
                                         <span class="small">Productos</span>

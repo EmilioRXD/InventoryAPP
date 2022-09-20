@@ -11,7 +11,9 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
             <!-- Main content -->
             <section class="content">
                 <div class="row">
-                    <div class="col-xs-12 col-sm-3">
+
+                    <!-- Registro de Nuevo Producto -->
+                    <div class="col-xs-12 col-sm-4 col-md-offset-4 hidden" id="contenedor_formulario">
                         <div class="box box-primary">
                             <div class="box-header with-border">
                                 <h4 class="text-center">Registrar nuevo producto</h4>
@@ -65,7 +67,7 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
                                     <div class="col-xs-6">
                                         <button id="guardar_producto" class="form-control btn btn-info">Guardar</button>
                                     </div>
-                                    <div class="col-xs-6" hidden="hidden">
+                                    <div class="col-xs-6">
                                         <button id="cancelar_producto_editado" class="form-control btn btn-warning">Cancelar</button>
                                     </div>
                                 </div>
@@ -73,16 +75,23 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
                             </div><!-- /.box-body -->
                         </div><!-- /.box -->
                     </div>
-                    <div class="col-xs-12 col-sm-9">
+                    <!-- Registro de Nuevo Producto -->
+                    
+                    <!-- Inventario -->
+                    <div class="col-xs-12" id="inventory">
                         <div class="box box-primary">
                             <div class="box-header with-border">
                                 <div class="form-group">
-                                    <input type="text" id="buscar_producto" class="form-control"
-                                        placeholder="Buscar producto por id o nombre">
+                                    <div class="col-xs-12 col-sm-10" style="margin-bottom:1em;">
+                                        <input type="text" id="buscar_producto" class="form-control" placeholder="Buscar producto por id o nombre">
+                                    </div>
+                                    <div class="col-xs-12 col-sm-2">
+                                        <button id="agregar_producto" class="btn btn-info btn-block">Registrar Nuevo Producto</button>
+                                    </div>
                                 </div>
                             </div><!-- /.box-header -->
                             <div class="box-body">
-                                <div class="">
+                                <div class="table-responsive">
                                     <table id="TABLEONE" class="table table-bordered table-striped">
                                         <thead>
                                         <tr>
@@ -104,6 +113,8 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
                             </div><!-- /.box-body -->
                         </div><!-- /.box -->
                     </div>
+                    <!-- Inventario -->
+                    
                 </div><!-- /.row -->
             </section><!-- /.content -->
         </div>
@@ -260,13 +271,12 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
 <script type="text/javascript">
 
     $(function () {
-    $("#example1").dataTable();
     $('#TABLEONE').dataTable({
         "bPaginate": true,
-        "bLengthChange": true,
+        "bLengthChange": false,
         "bFilter": false,
         "bSort": true,
-        "bInfo": true,
+        "bInfo": false,
         "bAutoWidth": false
     });
     });

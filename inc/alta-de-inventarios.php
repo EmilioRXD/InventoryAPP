@@ -1,4 +1,4 @@
-<body class="skin-green sidebar-collapse sidebar-open">
+<body class="<?php echo THEME ?> sidebar-collapse sidebar-open">
     <div class="wrapper">
         <?php
         if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");

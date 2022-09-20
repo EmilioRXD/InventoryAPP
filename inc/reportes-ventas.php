@@ -1,4 +1,4 @@
-<body class="skin-green sidebar-collapse sidebar-open">
+<body class="<?php echo THEME ?> sidebar-collapse sidebar-open">
     <div class="wrapper" style="background-color: #ecf0f5;">
 
         <?php

@@ -3,10 +3,12 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
 ?>
 <?php
 const NOMBRE_NEGOCIO = "InventoryAPP";
+const THEME = "skin-green";
 ?>
 <!DOCTYPE html>
 <html>
 <head>
+
     <title><?php echo NOMBRE_NEGOCIO ?></title>
     <link rel="icon" type="image/png" href="./img/favicon.png"/>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">

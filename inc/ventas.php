@@ -1,4 +1,4 @@
-<body class="skin-green sidebar-collapse sidebar-open">
+<body class="<?php echo THEME ?> sidebar-collapse sidebar-open">
     <div class="wrapper">
     
     <!-- Right side column. Contains the navbar and content of the page -->

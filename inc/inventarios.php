@@ -82,11 +82,11 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
                         <div class="box box-primary">
                             <div class="box-header with-border">
                                 <div class="form-group">
-                                    <div class="col-xs-12 col-sm-10" style="margin-bottom:1em;">
+                                    <div class="col-xs-12 col-sm-9" style="margin-bottom:1em;">
                                         <input type="text" id="buscar_producto" class="form-control" placeholder="Buscar producto por id o nombre">
                                     </div>
-                                    <div class="col-xs-12 col-sm-2">
-                                        <button id="agregar_producto" class="btn btn-info btn-block">Registrar Nuevo Producto</button>
+                                    <div class="col-xs-12 col-sm-3">
+                                        <button id="agregar_producto" class="btn btn-success btn-block" style="overflow: hidden;"><i class="fa fa-plus"></i> Agregar Producto</button>
                                     </div>
                                 </div>
                             </div><!-- /.box-header -->

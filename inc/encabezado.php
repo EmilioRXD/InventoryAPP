@@ -2,7 +2,7 @@
 if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
 ?>
 <?php
-const NOMBRE_NEGOCIO = "InventoryAPP";
+const NOMBRE_NEGOCIO = "Inventory<b>APP</b>";
 const THEME = "skin-green";
 ?>
 <!DOCTYPE html>

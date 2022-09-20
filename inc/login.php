@@ -1,7 +1,7 @@
 <body class="login-page">
     <div class="login-box">
         <div class="login-logo">
-        <b>Admin</b>LTE
+            <?php echo NOMBRE_NEGOCIO ?>
         </div><!-- /.login-logo -->
         <div class="login-box-body">
         <p class="login-box-msg">Inicia sesión</p>

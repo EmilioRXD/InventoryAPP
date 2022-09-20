@@ -131,7 +131,7 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
             </div>
             <div class="modal-body">
                 <div class="well">
-                    <h1>Inventory
+                    <h1>InventoryAPP
                         <small>v2.7</small>
                     </h1>
                     <br>

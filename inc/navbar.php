@@ -47,52 +47,58 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
         <ul class="sidebar-menu">
         <li class="header">MENÚ DE NAVEGACIÓN </li>
         <?php inicia_sesion_segura();
-                echo (intval($_SESSION["administrador"]) === 1) ? '<li class="treeview">
-                <a href="./ventas"><i class="fa fa-usd"></i> Ventas</a>
-            </li>
-            <li class="treeview">
-                <a href="./inventarios"><i class="fa fa-cubes"></i> Inventarios</a>
-            </li>
-            <li class="treeview">
-                <a href="./gastos"><i class="fa fa-calculator"></i> Gastos</a>
-            </li>
-            <li class="treeview">
-                <a href="./alta-de-inventarios"><i class="fa fa-angle-double-up"></i> Alta de inventarios</a>
-            </li>
-            <li class="treeview">
-                <a href="#">
-                <i class="fa fa-file-pdf-o"></i>
-                <span>Reportes</span>
-                <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                <li><a href="./reportes-inventarios">Inventarios</a></li>
-                <li><a href="./reportes-bajas-inventario">Bajas de inventario</a></li>
-                <li><a href="./reportes-ventas">Ventas</a></li>
-                <li><a href="./reportes-gastos">Gastos</a></li>
-                <li><a href="./productos-en-stock">Productos en stock</a></li>
-                </ul>
-            </li>
-            <li><a href="./usuarios"><i class="fa fa-user"></i> Usuarios</a></li>' : '<li class="treeview">
-                            <a href="./ventas"><i class="fa fa-usd"></i> Ventas</a>
-                        </li>
-                        <li class="treeview">
-                            <a href="./gastos"><i class="fa fa-calculator"></i> Gastos</a>
-                        </li>
-                        <li class="treeview">
-                            <a href="./alta-de-inventarios"><i class="fa fa-angle-double-up"></i> Alta de inventarios</a>
-                        </li>
-                        <li class="treeview">
-                            <a href="#">
-                            <i class="fa fa-file-pdf-o"></i>
-                            <span>Reportes</span>
-                            <i class="fa fa-angle-left pull-right"></i>
-                            </a>
-                            <ul class="treeview-menu">
-                            <li><a href="./reportes-ventas">Ventas</a></li>
-                            <li><a href="./reportes-gastos">Gastos</a></li>
-                            </ul>
-                        </li>';?>
+                echo (intval($_SESSION["administrador"]) === 1)
+                
+                ?  '<li class="treeview">
+                        <a href="./ventas"><i class="fa fa-shopping-cart"></i> Ventas</a>
+                    </li>
+                    <li class="treeview">
+                        <a href="./inventarios"><i class="fa fa-cubes"></i> Inventarios</a>
+                    </li>
+                    <li class="treeview">
+                        <a href="./gastos"><i class="fa fa-calculator"></i> Gastos</a>
+                    </li>
+                    <li class="treeview">
+                        <a href="./alta-de-inventarios"><i class="fa fa-angle-double-up"></i> Alta de inventarios</a>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                        <i class="fa fa-file-pdf-o"></i>
+                        <span>Reportes</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                        <li><a href="./reportes-inventarios">Inventarios</a></li>
+                        <li><a href="./reportes-bajas-inventario">Bajas de inventario</a></li>
+                        <li><a href="./reportes-ventas">Ventas</a></li>
+                        <li><a href="./reportes-gastos">Gastos</a></li>
+                        <li><a href="./productos-en-stock">Productos en stock</a></li>
+                        </ul>
+                    </li>
+                    <li><a href="./divisas"><i class="fa fa-usd"></i> Divisas</a></li>
+                    <li><a href="./usuarios"><i class="fa fa-user"></i> Usuarios</a></li>'
+                    
+                :  '<li class="treeview">
+                        <a href="./ventas"><i class="fa fa-shopping-cart"></i> Ventas</a>
+                    </li>
+                    <li class="treeview">
+                        <a href="./gastos"><i class="fa fa-calculator"></i> Gastos</a>
+                    </li>
+                    <li class="treeview">
+                        <a href="./alta-de-inventarios"><i class="fa fa-angle-double-up"></i> Alta de inventarios</a>
+                    </li>
+                    <li class="treeview">
+                        <a href="#">
+                        <i class="fa fa-file-pdf-o"></i>
+                        <span>Reportes</span>
+                        <i class="fa fa-angle-left pull-right"></i>
+                        </a>
+                        <ul class="treeview-menu">
+                        <li><a href="./reportes-ventas">Ventas</a></li>
+                        <li><a href="./reportes-gastos">Gastos</a></li>
+                        </ul>
+                    </li>';
+        ?>
         
         </ul>
     </section>

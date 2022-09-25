@@ -52,7 +52,12 @@
                                         placeholder="Ingrese el código de barras o el nombre del producto"
                                     />
                                 </div>
-                                <h1 hidden="hidden"><strong>Total: </strong><span id="contenedor_total"></span></h1>
+                                <div class="col-sm-6 text-center">
+                                    <h2 hidden="hidden"><strong>Total: </strong><span id="contenedor_total"></span></h1>
+                                </div>
+                                <div class="col-sm-6 text-center">
+                                    <h2 hidden="hidden"><strong>Total: </strong><span id="contenedor_total_verde"></span></h1>
+                                </div>
                                 <div class="row">
                                     <div class="col-xs-12 table-responsive" id="contenedor_tabla" style="border: none;">
 

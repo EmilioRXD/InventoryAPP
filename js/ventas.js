@@ -20,7 +20,8 @@ var productos_vender = [],
     TECLA_F3 = 114,
     TECLA_ENTER = 13,
     TECLA_MENOS = 109,
-    EL_CLIENTE_USA_TICKET = true;
+    EL_CLIENTE_USA_TICKET = true,
+    precioVerde = 8.35;
 
 window.onbeforeunload = function () {
     if (puede_salir == false || productos_vender.length > 0) return "Todavía no has completado la venta.";
@@ -182,7 +183,10 @@ function dibujar_productos() {
                                         .html('Producto'),
 
                                     $("<th>")
-                                        .html('Precio'),
+                                        .html('Precio Bs'),
+
+                                    $("<th>")
+                                        .html('Precio $'),
 
                                     $("<th>")
                                         .html('Cantidad'),
@@ -213,7 +217,10 @@ function dibujar_productos() {
                             .html(productos_vender[i].nombre),
 
                         $("<td>")
-                            .html("$" + productos_vender[i].precio_venta),
+                            .html("Bs " + productos_vender[i].precio_venta),
+
+                        $("<td>")
+                            .html("$ " + (productos_vender[i].precio_venta/precioVerde).toFixed(2)),
 
                         $("<td>")
                             .html(
@@ -230,7 +237,7 @@ function dibujar_productos() {
                             ),
 
                         $("<td>")
-                            .html("$" + Math.round(productos_vender[i].total * 100) / 100),
+                            .html("Bs " + Math.round(productos_vender[i].total * 100) / 100),
 
                         $("<td>")
                             .html(
@@ -246,7 +253,8 @@ function dibujar_productos() {
             );
     }
     ayudante_total = Math.round(ayudante_total * 100) / 100;
-    $("#contenedor_total").text("$" + ayudante_total).parent().show();
+    $("#contenedor_total").text("Bs " + ayudante_total).parent().show();
+    $("#contenedor_total_verde").text("$ " + (ayudante_total/precioVerde).toFixed(2)).parent().show();
     total = ayudante_total;
 }
 
@@ -254,7 +262,7 @@ function dibujar_productos() {
 function preparar_para_realizar_venta() {
     if (productos_vender.length > 0) {
         $("#modal_procesar_venta").modal("show");
-        $("#contenedor_total_modal").text("$" + total).parent().show();
+        $("#contenedor_total_modal").text("Bs " + total).parent().show();
     }
 }
 function deshabilita_para_venta() {

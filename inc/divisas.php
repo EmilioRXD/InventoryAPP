@@ -17,10 +17,7 @@
                                 
                                 <!-- left column -->
                                 <div class="col-sm-4" style="margin-top: .5em">
-                                    <button id="quitar_ultimo_producto" type="button" class="btn btn-warning btn-block">
-                                        <i class="fa-minus fa visible-xs"></i>
-                                        <span class="hidden-xs"><kbd>-</kbd> Quitar último producto</span>
-                                    </button>
+                                                                      
                                 </div><!-- /.col -->
                                 <!-- /left column -->
 

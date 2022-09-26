@@ -80,7 +80,12 @@
                     <h4 class="modal-title">Realizar venta</h4>
                 </div>
                 <div class="modal-body">
-                    <h2 hidden="hidden"><strong>Total: </strong><span id="contenedor_total_modal"></span></h2>
+                    <div class="col-sm-6 text-center">
+                        <h2 hidden="hidden"><strong>Total: </strong><span id="contenedor_total_modal"></span></h2>
+                    </div>
+                    <div class="col-sm-6 text-center">
+                        <h2 hidden="hidden"><strong>Total: </strong><span id="contenedor_total_modal_verde"></span></h2>
+                    </div>
                     <div class="row">
                         <div class="form-group">
                             <div class="col-xs-12">

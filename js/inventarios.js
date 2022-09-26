@@ -527,9 +527,9 @@ function dibujar_todos_los_productos(productos) {
                     .append(
                         $('<td class="text-center">').html(codigo),
                         $('<td style="word-wrap: break-word; white-space: normal;">').html(nombre),
-                        $('<td class="text-center">').html("$" + productos[i].precio_compra),
-                        $('<td class="text-center">').html("$" + productos[i].precio_venta),
-                        $('<td class="text-center">').html("$" + productos[i].utilidad),
+                        $('<td class="text-center">').html("Bs. " + productos[i].precio_compra),
+                        $('<td class="text-center">').html("Bs. " + productos[i].precio_venta),
+                        $('<td class="text-center">').html("Bs. " + productos[i].utilidad),
                         $('<td class="text-center">').html(productos[i].existencia),
                         $('<td class="text-center">').html(productos[i].stock),
                         $('<td class="text-center">').html(productos[i].familia),

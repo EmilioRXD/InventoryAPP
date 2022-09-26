@@ -20,8 +20,9 @@ var productos_vender = [],
     TECLA_F3 = 114,
     TECLA_ENTER = 13,
     TECLA_MENOS = 109,
-    EL_CLIENTE_USA_TICKET = true,
-    precioVerde = 8.35;
+    EL_CLIENTE_USA_TICKET = true;
+
+var precioVerde = $("#dolar").text();
 
 window.onbeforeunload = function () {
     if (puede_salir == false || productos_vender.length > 0) return "Todavía no has completado la venta.";

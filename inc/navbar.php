@@ -1,5 +1,16 @@
 <?php
 if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
+
+
+    if (isset($_POST["enviar"])) {
+    session_start();
+
+    $_SESSION["precio_dolar"] = htmlentities($_POST["precio_dolar"]);
+    }
+
+    session_start();
+
+    $precio_dolar = $_SESSION["precio_dolar"];
 ?>
 <header class="main-header">
     <a href="#" id="marca_del_producto" class="logo"><?php echo NOMBRE_NEGOCIO ?></a>
@@ -14,7 +25,9 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
         </a>
         <div class="navbar-custom-menu">
         <ul class="nav navbar-nav">
-            
+            <li>
+                <a href="divisas"><b>Bs. </b><b  id="dolar"><?php echo $precio_dolar;?></b></a>
+            </li>
             <!-- Cierre de Sesión -->
             <li>
                 <a href="./modulos/usuarios/cerrar_sesion.php">Cerrar Sesión</a>

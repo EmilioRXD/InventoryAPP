@@ -2,7 +2,7 @@
     <div class="wrapper" style="background-color: #ecf0f5;">
 
         <?php
-        if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
+            if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
         ?>
 
         <!-- Right side column. Contains the navbar and content of the page -->
@@ -44,29 +44,15 @@
                             
                             </div><!-- /.box-header -->
                             <div class="box-body">
-                                <div class="form-group">
-                                    <label class="col-form-label" for="codigo_producto">
-                                        <i class="fa fa-barcode fs-6"></i>
-                                        <span class="small">Productos</span>
-                                    </label>
-                                    <input
-                                        class="form-control form-control-sm"
-                                        type="text"
-                                        id="codigo_producto"
-                                        placeholder="Ingrese el código de barras o el nombre del producto"
-                                    />
-                                </div>
-                                <div class="col-sm-6 text-center">
-                                    <h2 hidden="hidden"><strong>Total: </strong><span id="contenedor_total"></span></h1>
-                                </div>
-                                <div class="col-sm-6 text-center">
-                                    <h2 hidden="hidden"><strong>Total: </strong><span id="contenedor_total_verde"></span></h1>
-                                </div>
-                                <div class="row">
-                                    <div class="col-xs-12 table-responsive" id="contenedor_tabla" style="border: none;">
-
+                                <form method="POST">
+                                    <label for="precio_dolar">Precio Dolar</label>
+                                    <div class="input-group">
+                                        <input class="form-control" type="number" name="precio_dolar" step="0.01" placeholder="Precio Dolar">
+                                        <div class="input-group-btn">
+                                        <button type="sumit" name="enviar" class="btn btn-danger">Enviar</button>
+                                        </div><!-- /btn-group -->
                                     </div>
-                                </div>
+                                </form>
                             </div><!-- /.box-body -->
                         </div><!-- /.box -->
                     </div><!-- /.col -->

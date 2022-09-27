@@ -53,10 +53,10 @@
                                     />
                                 </div>
                                 <div class="col-sm-6 text-center">
-                                    <h2 hidden="hidden"><strong>Total: </strong><span id="contenedor_total"></span></h1>
+                                    <h2 hidden="hidden"><strong>Total: </strong><span id="contenedor_total"></span></h2>
                                 </div>
                                 <div class="col-sm-6 text-center">
-                                    <h2 hidden="hidden"><strong>Total: </strong><span id="contenedor_total_verde"></span></h1>
+                                    <h2 hidden="hidden"><strong>Total: </strong><span id="contenedor_total_verde"></span></h2><br>
                                 </div>
                                 <div class="row">
                                     <div class="col-xs-12 table-responsive" id="contenedor_tabla" style="border: none;">

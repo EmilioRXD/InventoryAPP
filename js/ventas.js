@@ -20,8 +20,8 @@ var productos_vender = [],
     TECLA_F3 = 114,
     TECLA_ENTER = 13,
     TECLA_MENOS = 109,
-    ayudante_total = 0,
     dolar = 0,
+    ayudante_divisa = 0,
     EL_CLIENTE_USA_TICKET = true;
 
 var precioVerde = $("#dolar").text();
@@ -207,6 +207,7 @@ function dibujar_productos() {
                     $("<tbody>")
                 )
         );
+    var ayudante_total = 0;
     for (var i = productos_vender.length - 1; i >= 0; i--) {
         ayudante_total += productos_vender[i].total;
         $("#contenedor_tabla tbody")
@@ -258,7 +259,8 @@ function dibujar_productos() {
     ayudante_total = Math.round(ayudante_total * 100) / 100;
     $("#contenedor_total").text("Bs. " + ayudante_total).parent().show();
     $("#contenedor_total_verde").text("$ " + (ayudante_total/precioVerde).toFixed(2)).parent().show();
-    total = ayudante_total;
+    ayudante_divisa = ayudante_total;
+    total = ayudante_divisa;
 }
 
 
@@ -339,14 +341,15 @@ function escuchar_elementos() {
     $("#metodo_pago").change(function () {
         $("#contenedor_cambio").parent().hide();
         if ($("#metodo_pago").val().trim() == 0) {
-            total = ayudante_total/precioVerde;
+            total = ayudante_divisa/precioVerde;
             $("#chkEfectivoExacto").prop('checked', false)
             $("#pago_usuario").val("");
             dolar = 1;
         }else{
-            total = ayudante_total;
+            total = ayudante_divisa;
             $("#chkEfectivoExacto").prop('checked', false)
             $("#pago_usuario").val("");
+            dolar = 0;
         }
     })
 
@@ -364,6 +367,7 @@ function escuchar_elementos() {
         preparar_para_realizar_venta();
         $("#chkEfectivoExacto").prop('checked', false)
         $("#pago_usuario").val("");
+        $("#metodo_pago").val(2);
     });
     $("#cancelar_toda_la_venta").click(function () {
         cancelar_venta();
@@ -383,7 +387,7 @@ function escuchar_elementos() {
         if (cambio >= 0 && !isNaN(pago)) {
             if (dolar == 1) {
                 $("#contenedor_cambio").text("$ " + (cambio).toFixed(2)).parent().show();
-            } else{
+            } else{    
                 $("#contenedor_cambio").text("Bs. " + (cambio).toFixed(2)).parent().show();
             }
         } else {
@@ -399,6 +403,8 @@ function escuchar_elementos() {
         }
     });
 
+    /* Integrar datos que se alojaran en la base datos */
+
     $("#realizar_venta").click(function () {
         var pago = $("#pago_usuario").val(),
             cambio = pago - total;
@@ -409,6 +415,9 @@ function escuchar_elementos() {
             $("#pago_usuario").parent().addClass('has-error');
         }
     });
+
+    /* Integrar datos que se alojaran en la base datos */
+
 
 
     $("#modal_procesar_venta").on("shown.bs.modal", function () {

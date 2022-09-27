@@ -20,6 +20,8 @@ var productos_vender = [],
     TECLA_F3 = 114,
     TECLA_ENTER = 13,
     TECLA_MENOS = 109,
+    ayudante_total = 0,
+    dolar = 0,
     EL_CLIENTE_USA_TICKET = true;
 
 var precioVerde = $("#dolar").text();
@@ -164,6 +166,7 @@ function dibujar_productos() {
                     .html('Agrega productos al carrito<br><i class = "fa fa-4x fa-cart-plus"></i>')
             );
         $("#contenedor_total").parent().hide();
+        $("#contenedor_total_verde").parent().hide();
         return;
     }
 
@@ -204,7 +207,6 @@ function dibujar_productos() {
                     $("<tbody>")
                 )
         );
-    var ayudante_total = 0;
     for (var i = productos_vender.length - 1; i >= 0; i--) {
         ayudante_total += productos_vender[i].total;
         $("#contenedor_tabla tbody")
@@ -258,6 +260,7 @@ function dibujar_productos() {
     $("#contenedor_total_verde").text("$ " + (ayudante_total/precioVerde).toFixed(2)).parent().show();
     total = ayudante_total;
 }
+
 
 
 function preparar_para_realizar_venta() {
@@ -333,6 +336,20 @@ function cancelar_venta() {
 
 
 function escuchar_elementos() {
+    $("#metodo_pago").change(function () {
+        $("#contenedor_cambio").parent().hide();
+        if ($("#metodo_pago").val().trim() == 0) {
+            total = ayudante_total/precioVerde;
+            $("#chkEfectivoExacto").prop('checked', false)
+            $("#pago_usuario").val("");
+            dolar = 1;
+        }else{
+            total = ayudante_total;
+            $("#chkEfectivoExacto").prop('checked', false)
+            $("#pago_usuario").val("");
+        }
+    })
+
     $("#imprimir_ticket").click(function () {
         $("#pago_usuario").focus();
     });
@@ -345,16 +362,30 @@ function escuchar_elementos() {
     });
     $("#preparar_venta").click(function () {
         preparar_para_realizar_venta();
+        $("#chkEfectivoExacto").prop('checked', false)
+        $("#pago_usuario").val("");
     });
     $("#cancelar_toda_la_venta").click(function () {
         cancelar_venta();
+    });
+    $("#chkEfectivoExacto").change(function() {
+        if ($("#chkEfectivoExacto").is(':checked')){
+            $("#pago_usuario").val((total).toFixed(2));
+            $("#contenedor_cambio").parent().hide();
+        } else {
+            $("#pago_usuario").val("");
+        }
     });
     $("#pago_usuario").keyup(function (evento) {
         $(this).parent().removeClass('has-error');
         var pago = $(this).val(),
             cambio = pago - total;
         if (cambio >= 0 && !isNaN(pago)) {
-            $("#contenedor_cambio").text("$" + cambio).parent().show();
+            if (dolar == 1) {
+                $("#contenedor_cambio").text("$ " + (cambio).toFixed(2)).parent().show();
+            } else{
+                $("#contenedor_cambio").text("Bs. " + (cambio).toFixed(2)).parent().show();
+            }
         } else {
             $("#contenedor_cambio").parent().hide();
         }
@@ -519,4 +550,3 @@ function comprueba_si_existe_codigo(codigo) {
 
     });
 }
-

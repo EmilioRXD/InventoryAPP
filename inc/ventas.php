@@ -84,23 +84,38 @@
                         <h2 hidden="hidden"><strong>Total: </strong><span id="contenedor_total_modal"></span></h2>
                     </div>
                     <div class="col-sm-6 text-center">
-                        <h2 hidden="hidden"><strong>Total: </strong><span id="contenedor_total_modal_verde"></span></h2>
+                        <h2 hidden="hidden"><strong>Total: </strong><span id="contenedor_total_modal_verde"></span></h2><br>
                     </div>
                     <div class="row">
-                        <div class="form-group">
-                            <div class="col-xs-12">
-                                <label for="pago_usuario">El cliente paga con...</label>
-                                <input placeholder="El cliente paga con..." type="number" id="pago_usuario"
-                                    class="form-control">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label for="metodo_pago">Selecione el meotodo de pago</label>
+                                <select class="form-control" id="metodo_pago">
+                                    <option value="0">&nbsp; $ &nbsp;&nbsp;&nbsp; Efectivo</option>
+                                    <option value="1">Bs. &nbsp; Efectivo</option>
+                                    <option value="2" selected="true">Bs. &nbsp; Tarjeta</option>
+                                    <option value="3">Bs. &nbsp; Pago Movil</option>
+                                    <option value="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Credito</option>
+                                    <option value="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Otro Metodo</option>
+                                </select>
                             </div>
-                        </div>
-                        <div class="col-xs-12 col-md-2 hidden">
-                            <div class="checkbox checkbox-primary checkbox-circle">
-                                <input type="checkbox" id="imprimir_ticket">
-                                <label for="imprimir_ticket">
-                                    Ticket <i class="fa fa-ticket"></i>
+                            <div class="form-group">
+                                <label for="pago_usuario">Efectivo recibido</label>
+                                <input class="form-control" type="number" step="0.01" placeholder="Cantidad de efectivo recibido" id="pago_usuario">
+                            </div>
+                            <div class="checkbox">
+                                <label>
+                                <input type="checkbox" id="chkEfectivoExacto"> Monto Efectivo
                                 </label>
                             </div>
+                            <!-- TICKET -->
+                            <div class="checkbox hidden">
+                                <label for="imprimir_ticket">
+                                    <input type="checkbox" id="imprimir_ticket">
+                                    <i class="fa fa-ticket"></i> Ticket
+                                </label>
+                            </div>
+                            <!-- TICKET -->
                         </div>
                     </div>
                     <h2 hidden="hidden">Cambio: <span id="contenedor_cambio"></span></h2>

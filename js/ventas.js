@@ -282,6 +282,9 @@ function habilita_para_venta() {
     $("input, button").prop("disabled", false);
     puede_salir = true;
 }
+
+/* funcion que realiza la venta, captura los datos del usuario y lo guarda en la base de datos */
+
 function realizar_venta(productos, total, cambio, ticket) {
     cambio = parseFloat(cambio);
     if (cambio < 0) cambio = 0;

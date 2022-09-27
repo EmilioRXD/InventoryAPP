@@ -100,12 +100,12 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="pago_usuario">Efectivo recibido</label>
+                                <label for="pago_usuario">Moto Recibido</label>
                                 <input class="form-control" type="number" step="0.01" placeholder="Cantidad de efectivo recibido" id="pago_usuario">
                             </div>
                             <div class="checkbox">
                                 <label>
-                                <input type="checkbox" id="chkEfectivoExacto"> Monto Efectivo
+                                <input type="checkbox" id="chkEfectivoExacto"> Monto Exacto
                                 </label>
                             </div>
                             <!-- TICKET -->

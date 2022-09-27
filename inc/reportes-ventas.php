@@ -45,10 +45,10 @@
                         <div class="box box-default">
                             <div class="box-header with-border hidden-print">
                                 <div class="col-sm-6">
-                                    <h2 class="text-center" hidden="hidden"><strong>Total:</strong> $<span id="mostrar_total"></span></h2>
+                                    <h2 class="text-center" hidden="hidden"><strong>Total:</strong> Bs. <span id="mostrar_total"></span></h2>
                                 </div>
                                 <div class="col-sm-6">
-                                    <h2 class="text-center" hidden="hidden"><strong>Utilidad:</strong> $<span id="mostrar_utilidad"></span></h2>
+                                    <h2 class="text-center" hidden="hidden"><strong>Utilidad:</strong> Bs. <span id="mostrar_utilidad"></span></h2>
                                 </div>
                             </div><!-- /.box-header -->
                             <div class="box-body" style="min-height:40vh;">

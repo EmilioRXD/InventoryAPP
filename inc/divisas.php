@@ -16,26 +16,14 @@
                             <div class="box-header with-border">
                                 
                                 <!-- left column -->
-                                <div class="col-sm-4" style="margin-top: .5em">
-                                                                      
+                                <div class="col-sm-6" style="margin-top: .5em">
+                                    <h2><strong>Precio Local: </strong>Bs. <?php echo $precio_dolar;?></h2>
                                 </div><!-- /.col -->
                                 <!-- /left column -->
 
-                                <!-- center column -->
-                                <div class="col-sm-4" style="margin-top: .5em">
-                                    <button id="preparar_venta" type="button" class="btn btn-success btn-block">
-                                        <i class="fa-check-circle-o fa visible-xs"></i>
-                                        <span class="hidden-xs"><kbd>F1</kbd> Realizar venta</span>
-                                    </button>
-                                </div><!-- /.col -->
-                                <!-- /center column -->
-
                                 <!-- right column -->
-                                <div class="col-sm-4" style="margin-top: .5em">
-                                    <button id="cancelar_toda_la_venta" type="button" class="btn btn-danger btn-block">
-                                        <i class="fa-ban fa visible-xs"></i>
-                                        <span class="hidden-xs"><kbd>F2</kbd> Cancelar toda la venta</span>
-                                    </button>
+                                <div class="col-sm-6" style="margin-top: .5em">
+                                   
                                 </div><!-- /.col -->
                                 <!-- /right column -->
                             

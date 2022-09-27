@@ -173,11 +173,11 @@ function dibuja_tabla_ventas_por_familia(ventas) {
                     '<td>' +
                     (a.familia === "" ? "--Sin familia--" : a.familia) +
                     '</td>' +
-                    '<td> $' +
+                    '<td>Bs. ' +
                     a.total +
                     '</td>' +
                     '<td>' +
-                    '<strong>$' +
+                    '<strong>Bs. ' +
                     a.utilidad +
                     '</strong>' +
                     '</td>' +
@@ -191,11 +191,11 @@ function dibuja_tabla_ventas_por_familia(ventas) {
             '<td>' +
             'Totales' +
             '</td>' +
-            '<td> $' +
+            '<td>Bs. ' +
             total_por_familia +
             '</td>' +
             '<td>' +
-            '<strong>$' +
+            '<strong>Bs. ' +
             utilidad_por_familia +
             '</strong>' +
             '</td>' +
@@ -239,8 +239,8 @@ function dibuja_tabla_ventas(ventas) {
                         .append(
                             $("<tr>")
                                 .append(
-                                    $("<th>")
-                                        .html('Número de venta'),
+                                    $("<th class='text-center'>")
+                                        .html('N°'),
 
                                     $("<th>")
                                         .html('Fecha'),
@@ -248,8 +248,8 @@ function dibuja_tabla_ventas(ventas) {
                                     $("<th>")
                                         .html('Productos'),
 
-                                    $("<th>")
-                                        .html('Número de productos'),
+                                    $("<th style='width: 8em;'>")
+                                        .html('N° Productos'),
 
                                     $("<th>")
                                         .html('Total'),
@@ -257,7 +257,7 @@ function dibuja_tabla_ventas(ventas) {
                                     $("<th>")
                                         .html('Utilidad'),
 
-                                    $("<th>")
+                                    $("<th class='text-center'>")
                                         .html('Usuario')
                                 )
                         )
@@ -303,13 +303,13 @@ function dibuja_tabla_ventas(ventas) {
             .append(
                 $("<tr>")
                     .append(
-                        $("<td>").html(ventas_totales[i].numero_venta),
+                        $("<td class='text-center'>").html(ventas_totales[i].numero_venta),
                         $("<td>").html(ventas_totales[i].fecha),
                         $("<td>").html(ventas_totales[i].productos_como_html()),
                         $("<td>").html(ventas_totales[i].numero_productos),
-                        $("<td>").html("$" + ventas_totales[i].total),
-                        $("<td>").html("$" + ventas_totales[i].utilidad),
-                        $("<td>").html(ventas_totales[i].usuario)
+                        $("<td>").html("Bs. " + ventas_totales[i].total),
+                        $("<td>").html("Bs. " + ventas_totales[i].utilidad),
+                        $("<td class='text-center'>").html(ventas_totales[i].usuario)
                     )
             );
     }

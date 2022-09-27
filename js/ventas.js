@@ -283,6 +283,8 @@ function habilita_para_venta() {
     puede_salir = true;
 }
 
+
+
 /* funcion que realiza la venta, captura los datos del usuario y lo guarda en la base de datos */
 
 function realizar_venta(productos, total, cambio, ticket) {
@@ -329,6 +331,11 @@ function realizar_venta(productos, total, cambio, ticket) {
         }
     });
 }
+
+/* funcion que realiza la venta, captura los datos del usuario y lo guarda en la base de datos */
+
+
+
 
 
 function cancelar_venta() {

@@ -270,6 +270,8 @@ function escuchar_elementos() {
         esta_editando = true;
         id_temporal_ayudante = $(this).data("id");
         consultar_producto($(this).data("id"));
+        $("#contenedor_formulario").removeClass("hidden");
+        $("#inventory").addClass("hidden");
     });
 
     $("#modal_agregar_piezas").on("hidden.bs.modal", function () {
@@ -345,7 +347,7 @@ function escuchar_elementos() {
         if (precio_compra > 0 && precio_venta > 0 && utilidad > 0) {
             $("#mostrar_utilidad")
                 .show()
-                .text(utilidad)
+                .text((utilidad).toFixed(2))
                 .parent()
                 .show();
         }

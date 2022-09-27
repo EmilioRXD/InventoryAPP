@@ -41,7 +41,7 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
                                         placeholder="Precio de venta">
                                 </div>
                                 <div class="form-group">
-                                    <p hidden="hidden" class="h5"><strong>Utilidad: </strong>$<span id="mostrar_utilidad"></span></p>
+                                    <p hidden="hidden" class="h5"><strong>Utilidad: </strong>Bs. <span id="mostrar_utilidad"></span></p>
                                 </div>
                                 <div class="form-group">
                                     <label for="inventario">Inventario inicial</label>

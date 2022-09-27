@@ -123,9 +123,9 @@ function dibuja_tabla(productos) {
                     .append(
                         $("<td>").html(productos[i].codigo),
                         $("<td>").html(productos[i].nombre),
-                        $("<td>").html(productos[i].precio_compra),
-                        $("<td>").html(productos[i].precio_venta),
-                        $("<td>").html(productos[i].utilidad),
+                        $("<td>").html("Bs. " + productos[i].precio_compra),
+                        $("<td>").html("Bs. " + productos[i].precio_venta),
+                        $("<td>").html("Bs. " + productos[i].utilidad),
                         $("<td>").html(productos[i].existencia),
                         $("<td>").html(productos[i].familia)
                     )

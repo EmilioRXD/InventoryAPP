@@ -18,13 +18,15 @@ function Producto(numero, nombre) {
     this.nombre = nombre;
 }
 
-function Venta(numero_venta, fecha, nombre_producto, numero_productos, total, usuario, familia, utilidad) {
+function Venta(numero_venta, fecha, nombre_producto, numero_productos, total, total_bs, metodo_pago, usuario, familia, utilidad) {
     this.numero_venta = numero_venta;
     this.fecha = fecha;
     this.lista_productos = [];
     this.numero_productos = parseFloat(numero_productos);
     this.total = total;
+    this.total_bs = total_bs;
     this.lista_productos.push(new Producto(numero_productos, nombre_producto));
+    this.metodo_pago = metodo_pago;
     this.usuario = usuario;
     this.familia = familia;
     this.utilidad = utilidad;
@@ -173,11 +175,11 @@ function dibuja_tabla_ventas_por_familia(ventas) {
                     '<td>' +
                     (a.familia === "" ? "--Sin familia--" : a.familia) +
                     '</td>' +
-                    '<td>Bs. ' +
+                    '<td>$ ' +
                     a.total +
                     '</td>' +
                     '<td>' +
-                    '<strong>Bs. ' +
+                    '<strong>$ ' +
                     a.utilidad +
                     '</strong>' +
                     '</td>' +
@@ -191,11 +193,11 @@ function dibuja_tabla_ventas_por_familia(ventas) {
             '<td>' +
             'Totales' +
             '</td>' +
-            '<td>Bs. ' +
+            '<td>$ ' +
             total_por_familia +
             '</td>' +
             '<td>' +
-            '<strong>Bs. ' +
+            '<strong>$ ' +
             utilidad_por_familia +
             '</strong>' +
             '</td>' +
@@ -252,10 +254,16 @@ function dibuja_tabla_ventas(ventas) {
                                         .html('N° Productos'),
 
                                     $("<th>")
-                                        .html('Total'),
+                                        .html('Total Bs'),
 
                                     $("<th>")
+                                        .html('Total $'),
+                                        
+                                    $("<th>")
                                         .html('Utilidad'),
+
+                                    $("<th>")
+                                        .html('Metodo Pago'),
 
                                     $("<th class='text-center'>")
                                         .html('Usuario')
@@ -270,14 +278,17 @@ function dibuja_tabla_ventas(ventas) {
         numero_productos = 0.0;
     var ventas_totales = [];
     var subtotal = 0,
+        subtotal_bs = 0,
         subtotal_utilidad = 0;
     for (var i = ventas.length - 1; i >= 0; i--) {
         subtotal = ventas[i].total;
+        subtotal_bs = ventas[i].total_bs;
         subtotal_utilidad = ventas[i].utilidad;
         if (ayudante_numero_venta === ventas[i].numero_venta) {
             var posicion = dame_posicion_venta(ventas_totales, ventas[i].numero_venta);
             ventas_totales[posicion].agrega_producto_lista(ventas[i].numero_productos, ventas[i].nombre_producto);
             ventas_totales[posicion].total = parseFloat(ventas_totales[posicion].total) + parseFloat(subtotal);
+            ventas_totales[posicion].total_bs = parseFloat(ventas_totales[posicion].total_bs);
             ventas_totales[posicion].utilidad = parseFloat(ventas_totales[posicion].utilidad) + parseFloat(subtotal_utilidad);
             numero_productos += parseFloat(ventas[i].numero_productos);
         } else {
@@ -288,6 +299,8 @@ function dibuja_tabla_ventas(ventas) {
                     ventas[i].nombre_producto,
                     parseFloat(ventas[i].numero_productos),
                     subtotal,
+                    subtotal_bs,
+                    ventas[i].metodo_pago,
                     ventas[i].usuario,
                     ventas[i].familia,
                     subtotal_utilidad
@@ -307,8 +320,10 @@ function dibuja_tabla_ventas(ventas) {
                         $("<td>").html(ventas_totales[i].fecha),
                         $("<td>").html(ventas_totales[i].productos_como_html()),
                         $("<td>").html(ventas_totales[i].numero_productos),
-                        $("<td>").html("Bs. " + ventas_totales[i].total),
-                        $("<td>").html("Bs. " + ventas_totales[i].utilidad),
+                        $("<td>").html("Bs. " + ventas_totales[i].total_bs),
+                        $("<td>").html("$ " + ventas_totales[i].total),
+                        $("<td>").html("$ " + ventas_totales[i].utilidad),
+                        $("<td>").html(ventas_totales[i].metodo_pago),
                         $("<td class='text-center'>").html(ventas_totales[i].usuario)
                     )
             );

@@ -6,7 +6,8 @@
         ?>
 
         <div class="row visible-print-block">
-            <h1 class="text-center">Reporte sobre ventas</h1>
+            <h1 class="text-center">Reporte sobre ventas</h1><br>
+            <h4 class="text-center">Precio Dolar: Bs. <?php echo $precio_dolar;?></h2>
         </div>
 
         <div class="content-wrapper" style="margin: 0;" id="quitar">
@@ -45,10 +46,10 @@
                         <div class="box box-default">
                             <div class="box-header with-border hidden-print">
                                 <div class="col-sm-6">
-                                    <h2 class="text-center" hidden="hidden"><strong>Total:</strong> Bs. <span id="mostrar_total"></span></h2>
+                                    <h2 class="text-center" hidden="hidden"><strong>Total:</strong> $ <span id="mostrar_total"></span></h2>
                                 </div>
                                 <div class="col-sm-6">
-                                    <h2 class="text-center" hidden="hidden"><strong>Utilidad:</strong> Bs. <span id="mostrar_utilidad"></span></h2>
+                                    <h2 class="text-center" hidden="hidden"><strong>Utilidad:</strong> $ <span id="mostrar_utilidad"></span></h2>
                                 </div>
                             </div><!-- /.box-header -->
                             <div class="box-body" style="min-height:40vh;">

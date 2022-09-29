@@ -195,8 +195,11 @@ CREATE TABLE `ventas` (
   `codigo_producto` text NOT NULL,
   `nombre_producto` text NOT NULL,
   `total` decimal(11,2) NOT NULL,
+  `total_bs` decimal(11,2) NOT NULL,
+  `precio_verde` decimal(11,2) NOT NULL,
   `fecha` datetime NOT NULL,
   `numero_productos` decimal(11,2) NOT NULL,
+  `metodo_pago` text NOT NULL,
   `usuario` tinytext NOT NULL,
   `familia` tinytext NOT NULL,
   `utilidad` decimal(8,2) unsigned NOT NULL

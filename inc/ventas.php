@@ -96,14 +96,13 @@
                                     <option value="2" selected="true">Bs. &nbsp; Tarjeta</option>
                                     <option value="3">Bs. &nbsp; Pago Movil</option>
                                     <option value="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Credito</option>
-                                    <option value="5">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Otro Metodo</option>
                                 </select>
                             </div>
-                            <div class="form-group">
+                            <div class="credito form-group">
                                 <label for="pago_usuario">Moto Recibido</label>
                                 <input class="form-control" type="number" step="0.01" placeholder="Cantidad de efectivo recibido" id="pago_usuario">
                             </div>
-                            <div class="checkbox">
+                            <div class="credito checkbox">
                                 <label>
                                 <input type="checkbox" id="chkEfectivoExacto"> Monto Exacto
                                 </label>

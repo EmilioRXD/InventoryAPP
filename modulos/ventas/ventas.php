@@ -48,7 +48,7 @@ function consultar_todas_las_ventas($fecha_inicio, $fecha_fin, $familia)
 }
 
 
-function hacer_venta($productos, $total, $ticket, $cambio)
+function hacer_venta($productos, $total, $total_bs, $precio_verde, $metodo_pago, $ticket, $cambio)
 {
     global $base_de_datos;
     require_once "../inventario/inventario.php";
@@ -56,8 +56,8 @@ function hacer_venta($productos, $total, $ticket, $cambio)
     $todo_correcto = true;
     foreach ($productos as $producto) {
         $todo_correcto = $todo_correcto and quitar_piezas($producto->cantidad, $producto->rowid);
-        $sentencia = $base_de_datos->prepare("INSERT INTO ventas(numero_venta, codigo_producto, nombre_producto, total, fecha, numero_productos, usuario, familia, utilidad) VALUES (?,?,?,?,?,?,?, ?, ?);");
-        $resultado_sentencia = $sentencia->execute(array($numero_venta, $producto->codigo, $producto->nombre, $producto->cantidad * $producto->precio_venta, date("Y-m-d H:i:s"), $producto->cantidad, $_SESSION["nombre_de_usuario"], $producto->familia, $producto->utilidad * $producto->cantidad));
+        $sentencia = $base_de_datos->prepare("INSERT INTO ventas(numero_venta, codigo_producto, nombre_producto, total, total_bs, precio_verde, fecha, numero_productos, metodo_pago, usuario, familia, utilidad) VALUES (?,?,?,?,?,?,?,?,?,?, ?, ?);");
+        $resultado_sentencia = $sentencia->execute(array($numero_venta, $producto->codigo, $producto->nombre, $producto->cantidad * $producto->precio_venta, $total_bs, $precio_verde, date("Y-m-d H:i:s"), $producto->cantidad, $metodo_pago, $_SESSION["nombre_de_usuario"], $producto->familia, $producto->utilidad * $producto->cantidad));
         $todo_correcto = $todo_correcto and $resultado_sentencia;
     }
     $todo_correcto = $todo_correcto and ingresar_dinero_venta_caja($total, $numero_venta);

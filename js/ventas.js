@@ -287,7 +287,7 @@ function habilita_para_venta() {
 
 /* funcion que realiza la venta, captura los datos del usuario y lo guarda en la base de datos */
 
-function realizar_venta(productos, total, cambio, ticket) {
+function realizar_venta(productos, total, totalBs, precioVerde, metodo_pago, cambio, ticket) {
     cambio = parseFloat(cambio);
     if (cambio < 0) cambio = 0;
     deshabilita_para_venta();
@@ -306,8 +306,11 @@ function realizar_venta(productos, total, cambio, ticket) {
     $.post('./modulos/ventas/realizar_venta.php', {
         "productos": productos,
         "total": total,
+        "total_bs": totalBs,
+        "precio_verde": precioVerde,
         "ticket": ticket,
-        "cambio": cambio
+        "cambio": cambio,
+        "metodo_pago": metodo_pago
     }, function (respuesta) {
         habilita_para_venta();
         ayudante_posicion = 0;
@@ -352,13 +355,17 @@ function cancelar_venta() {
 function escuchar_elementos() {
     $("#metodo_pago").change(function () {
         $(".contenedor_cambio").parent().hide();
+        $("#pago_usuario").val("").prop('disabled', false);
+        $("#chkEfectivoExacto").prop('checked', false);
+        $(".credito").show();
         if ($("#metodo_pago").val().trim() == 0) {
-            $("#chkEfectivoExacto").prop('checked', false)
-            $("#pago_usuario").val("");
             dolar = 1;
+        } else if ($("#metodo_pago").val().trim() == 4){
+            $(".credito").hide();
+            $("#chkEfectivoExacto").prop('checked', true);
+            $("#pago_usuario").val((totalBs).toFixed(2));
+            dolar = 0;
         }else{
-            $("#chkEfectivoExacto").prop('checked', false)
-            $("#pago_usuario").val("");
             dolar = 0;
         }
     })
@@ -375,10 +382,11 @@ function escuchar_elementos() {
     });
     $("#preparar_venta").click(function () {
         dolar = 0;
+        $(".credito").show();
         preparar_para_realizar_venta();
         $("#chkEfectivoExacto").prop('checked', false);
         $(".contenedor_cambio").parent().hide();
-        $("#pago_usuario").val("");
+        $("#pago_usuario").val("").prop('disabled', false);
         $("#metodo_pago").val(2);
     });
     $("#cancelar_toda_la_venta").click(function () {
@@ -386,6 +394,7 @@ function escuchar_elementos() {
     });
     $("#chkEfectivoExacto").change(function() {
         if ($("#chkEfectivoExacto").is(':checked')){
+            $("#pago_usuario").prop('disabled', true);
             if (dolar == 1){
                 $("#pago_usuario").val((total).toFixed(2));
             } else {
@@ -393,7 +402,7 @@ function escuchar_elementos() {
             }
             $(".contenedor_cambio").parent().hide();
         } else {
-            $("#pago_usuario").val("");
+            $("#pago_usuario").val("").prop('disabled', false);
         }
     });
     $("#pago_usuario").keyup(function (evento) {
@@ -430,10 +439,21 @@ function escuchar_elementos() {
     /* Integrar datos que se alojaran en la base datos */
 
     $("#realizar_venta").click(function () {
+
+        const switch_metodo_pago = {
+            0: '$ Efectivo',
+            1: 'Bs. Efectivo',
+            2: 'Bs. Tarjeta',
+            3: 'Bs. Pago Movil',
+            4: 'Credito',
+        }
+
+        var metodo_pago = switch_metodo_pago[$("#metodo_pago").val().trim()];
+
         var pago = $("#pago_usuario").val(),
             cambio = pago - total;
         if (cambio >= 0 && !isNaN(pago)) {
-            realizar_venta(productos_vender, total, cambio, $("#imprimir_ticket").prop("checked"));
+            realizar_venta(productos_vender, total, totalBs, precioVerde, metodo_pago, cambio, $("#imprimir_ticket").prop("checked"));
         } else {
             $("#pago_usuario").animateCss("shake");
             $("#pago_usuario").parent().addClass('has-error');

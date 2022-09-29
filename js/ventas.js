@@ -21,7 +21,7 @@ var productos_vender = [],
     TECLA_ENTER = 13,
     TECLA_MENOS = 109,
     dolar = 0,
-    totalVerde = 0,
+    totalBs = 0,
     EL_CLIENTE_USA_TICKET = true;
 
 var precioVerde = $("#dolar").text();
@@ -219,12 +219,12 @@ function dibujar_productos() {
 
                         $("<td>")
                             .html(productos_vender[i].nombre),
+                            
+                        $("<td>")
+                            .html("Bs. " + (productos_vender[i].precio_venta*precioVerde).toFixed(2)),
 
                         $("<td>")
-                            .html("Bs. " + productos_vender[i].precio_venta),
-
-                        $("<td>")
-                            .html("$ " + (productos_vender[i].precio_venta/precioVerde).toFixed(2)),
+                            .html("$ " + productos_vender[i].precio_venta),
 
                         $("<td>")
                             .html(
@@ -258,10 +258,10 @@ function dibujar_productos() {
     }
     ayudante_total = Math.round(ayudante_total * 100) / 100;
 
-    totalVerde = ayudante_total/precioVerde;
+    totalBs = ayudante_total*precioVerde;
 
-    $("#contenedor_total").text("Bs. " + ayudante_total).parent().show();
-    $("#contenedor_total_verde").text("$ " + (totalVerde).toFixed(2)).parent().show();
+    $("#contenedor_total").text("Bs. " + (totalBs).toFixed(2)).parent().show();
+    $("#contenedor_total_verde").text("$ " + ayudante_total).parent().show();
     total = ayudante_total;
 }
 
@@ -270,8 +270,8 @@ function dibujar_productos() {
 function preparar_para_realizar_venta() {
     if (productos_vender.length > 0) {
         $("#modal_procesar_venta").modal("show");
-        $("#contenedor_total_modal").text("Bs. " + total).parent().show();
-        $("#contenedor_total_modal_verde").text("$ " + (totalVerde).toFixed(2)).parent().show();
+        $("#contenedor_total_modal").text("Bs. " + (totalBs).toFixed(2)).parent().show();
+        $("#contenedor_total_modal_verde").text("$ " + total).parent().show();
     }
 }
 function deshabilita_para_venta() {
@@ -351,7 +351,7 @@ function cancelar_venta() {
 
 function escuchar_elementos() {
     $("#metodo_pago").change(function () {
-        $("#contenedor_cambio").parent().hide();
+        $(".contenedor_cambio").parent().hide();
         if ($("#metodo_pago").val().trim() == 0) {
             $("#chkEfectivoExacto").prop('checked', false)
             $("#pago_usuario").val("");
@@ -377,7 +377,7 @@ function escuchar_elementos() {
         dolar = 0;
         preparar_para_realizar_venta();
         $("#chkEfectivoExacto").prop('checked', false);
-        $("#contenedor_cambio").parent().hide();
+        $(".contenedor_cambio").parent().hide();
         $("#pago_usuario").val("");
         $("#metodo_pago").val(2);
     });
@@ -387,11 +387,11 @@ function escuchar_elementos() {
     $("#chkEfectivoExacto").change(function() {
         if ($("#chkEfectivoExacto").is(':checked')){
             if (dolar == 1){
-                $("#pago_usuario").val((totalVerde).toFixed(2));
-            } else {
                 $("#pago_usuario").val((total).toFixed(2));
+            } else {
+                $("#pago_usuario").val((totalBs).toFixed(2));
             }
-            $("#contenedor_cambio").parent().hide();
+            $(".contenedor_cambio").parent().hide();
         } else {
             $("#pago_usuario").val("");
         }
@@ -399,19 +399,23 @@ function escuchar_elementos() {
     $("#pago_usuario").keyup(function (evento) {
         $(this).parent().removeClass('has-error');
         var pago = $(this).val();
-        if (dolar == 1){
-            cambio = pago - totalVerde;
+        if(dolar==1){
+            cambioVerde = pago - total;
+            cambioBs = ( pago * precioVerde ) - totalBs;
         } else {
-            cambio = pago - total;
+            cambioVerde = (pago / precioVerde ) - total;
+            cambioBs = pago - totalBs;
         }
-        if (cambio >= 0 && !isNaN(pago)) {
-            if (dolar == 1) {
-                $("#contenedor_cambio").text("$ " + (cambio).toFixed(2)).parent().show();
-            } else{
-                $("#contenedor_cambio").text("Bs. " + (cambio).toFixed(2)).parent().show();
-            }
+        if (cambioVerde >= 0 && !isNaN(pago)) {
+            $("#contenedor_cambio_bs").text("Bs. " + (cambioBs).toFixed(2)).parent().show();
+            $("#contenedor_cambio_verde").text("$ " + (cambioVerde).toFixed(2)).parent().show();
+            // if (dolar == 1) {
+            //     $("#contenedor_cambio").text("$ " + (cambio).toFixed(2)).parent().show();
+            // } else{
+            //     $("#contenedor_cambio").text("Bs. " + (cambio).toFixed(2)).parent().show();
+            // }
         } else {
-            $("#contenedor_cambio").parent().hide();
+            $(".contenedor_cambio").parent().hide();
         }
         if (evento.keyCode === 13) {
             if (cambio >= 0 && !isNaN(pago)) {

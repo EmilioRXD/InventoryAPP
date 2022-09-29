@@ -97,7 +97,7 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
                                     Producto agregado satisfactoriamente
                                 </div>
                                 <div class="table-responsive">
-                                    <table id="TABLEONE" class="table table-bordered table-striped">
+                                    <table class="table table-striped table-hover table-bordered table-condensed">
                                         <thead>
                                         <tr>
                                             <th class="text-center">Código</th>
@@ -116,6 +116,19 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
                                     </table>
                                 </div>                             
                             </div><!-- /.box-body -->
+                            <div class="box-footer">
+                                    <div class="btn-group btn-group-justified">
+                                        <div class="btn-group">
+                                            <button id="cargar_productos_nuevos" type="button" class="btn btn-success"><i
+                                                    class="fa fa-arrow-left"></i> Productos nuevos
+                                            </button>
+                                        </div>
+                                        <div class="btn-group">
+                                            <button id="cargar_productos_antiguos" type="button" class="btn btn-info">Productos
+                                                anteriores <i class="fa fa-arrow-right"></i></button>
+                                        </div>
+                                    </div>
+                            </div>
                         </div><!-- /.box -->
                     </div>
                     <!-- Inventario -->
@@ -265,25 +278,6 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
     // Trigger bar when exiting the page
     jQuery(window).unload(function () {
         NProgress.start();
-    });
-
-</script>
-
-<!-- DATA TABES SCRIPT -->
-<script src="./public/plugins/datatables/jquery.dataTables.js" type="text/javascript"></script>
-<script src="./public/plugins/datatables/dataTables.bootstrap.js" type="text/javascript"></script>
-
-<script type="text/javascript">
-
-    $(function () {
-    $('#TABLEONE').dataTable({
-        "bPaginate": true,
-        "bLengthChange": false,
-        "bFilter": false,
-        "bSort": true,
-        "bInfo": false,
-        "bAutoWidth": false
-    });
     });
 
 </script>

@@ -118,7 +118,12 @@
                             <!-- TICKET -->
                         </div>
                     </div>
-                    <h2 hidden="hidden">Cambio: <span id="contenedor_cambio"></span></h2>
+                    <div class="col-sm-6 text-center">
+                        <h2 hidden="hidden">Cambio: <span class="contenedor_cambio" id="contenedor_cambio_bs"></span></h2>
+                    </div>
+                    <div class="col-sm-6 text-center">
+                        <h2 hidden="hidden">Cambio: <span class="contenedor_cambio" id="contenedor_cambio_verde"></span></h2>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <div class="row">

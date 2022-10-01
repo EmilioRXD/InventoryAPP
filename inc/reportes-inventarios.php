@@ -45,7 +45,7 @@
                                 </div>
                                 <div class="row text-center">
                                     <div class="col-xs-6">
-                                        <h2 hidden="hidden"><strong>Total de productos:</strong> <span id="total_productos"></span></h2>
+                                        <h2 hidden="hidden"><strong>Productos listados:</strong> <span id="total_productos"></span></h2>
                                     </div>
                                     <div class="col-xs-6">
                                         <h2 hidden="hidden"><strong>Valor del inventario:</strong> $ <span id="total_dinero"></span></h2>

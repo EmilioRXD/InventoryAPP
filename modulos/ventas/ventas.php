@@ -50,6 +50,9 @@ function consultar_todas_las_ventas($fecha_inicio, $fecha_fin, $familia)
 
 function hacer_venta($productos, $total, $total_bs, $precio_verde, $metodo_pago, $ticket, $cambio)
 {
+    #Definir Zona Horaria
+    date_default_timezone_set('America/Caracas');
+
     global $base_de_datos;
     require_once "../inventario/inventario.php";
     $numero_venta = ultimo_numero_de_venta();
@@ -70,6 +73,9 @@ function hacer_venta($productos, $total, $total_bs, $precio_verde, $metodo_pago,
 
 function ingresar_dinero_venta_caja($total, $numero_venta)
 {
+    #Definir Zona Horaria
+    date_default_timezone_set('America/Caracas');
+    
     global $base_de_datos;
     $usuario = $_SESSION["nombre_de_usuario"];
     $sentencia = $base_de_datos->prepare("INSERT INTO caja (caja_chica, ventas, gastos, fecha, no_venta, usuario) VALUES (?,?,?,?,?,?)");

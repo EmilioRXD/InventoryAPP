@@ -95,7 +95,7 @@
                                     <option value="1">Bs. &nbsp; Efectivo</option>
                                     <option value="2" selected="true">Bs. &nbsp; Tarjeta</option>
                                     <option value="3">Bs. &nbsp; Pago Movil</option>
-                                    <option value="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Credito</option>
+                                    <option value="4">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; Crédito</option>
                                 </select>
                             </div>
                             <div class="credito form-group">
@@ -107,6 +107,16 @@
                                 <input type="checkbox" id="chkEfectivoExacto"> Monto Exacto
                                 </label>
                             </div>
+
+                            <div class="credito_input form-group hidden">
+                                <label for="nombre_cliente">Nombre Cliente</label>
+                                <input class="form-control" type="text" placeholder="Ingrese el cliente al que se le realiza el crédito" id="nombre_cliente">
+                            </div>
+                            <div class="credito_input form-group hidden">
+                                <label for="numero_cliente">Número de Telefono</label>
+                                <input class="form-control" type="number" placeholder="Ingrese el número de contacto" id="numero_cliente">
+                            </div>
+
                             <!-- TICKET -->
                             <div class="checkbox hidden">
                                 <label for="imprimir_ticket">

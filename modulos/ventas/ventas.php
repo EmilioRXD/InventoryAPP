@@ -71,6 +71,29 @@ function hacer_venta($productos, $total, $total_bs, $precio_verde, $metodo_pago,
     return $todo_correcto;
 }
 
+function hacer_credito($nombre_cliente, $numero_cliente, $productos, $total, $metodo_pago, $ticket, $cambio)
+{
+    #Definir Zona Horaria
+    date_default_timezone_set('America/Caracas');
+
+    global $base_de_datos;
+    require_once "../inventario/inventario.php";
+    $numero_venta = ultimo_numero_de_venta();
+    $todo_correcto = true;
+    foreach ($productos as $producto) {
+        $todo_correcto = $todo_correcto and quitar_piezas($producto->cantidad, $producto->rowid);
+        $sentencia = $base_de_datos->prepare("INSERT INTO creditos(nombre_cliente, numero_cliente, codigo_producto, nombre_producto, total, fecha, numero_productos, metodo_pago, usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);");
+        $resultado_sentencia = $sentencia->execute(array($nombre_cliente, $numero_cliente, $producto->codigo, $producto->nombre, $total, date("Y-m-d H:i:s"), $producto->cantidad, $metodo_pago, $_SESSION["nombre_de_usuario"]));
+        $todo_correcto = $todo_correcto and $resultado_sentencia;
+    }
+    $todo_correcto = $todo_correcto and ingresar_dinero_venta_caja($total, $numero_venta);
+    if ($ticket === TRUE) {
+        include "../ticket.php";
+        imprime_ticket($productos, $numero_venta, $cambio);
+    }
+    return $todo_correcto;
+}
+
 function ingresar_dinero_venta_caja($total, $numero_venta)
 {
     #Definir Zona Horaria

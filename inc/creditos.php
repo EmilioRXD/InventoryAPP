@@ -38,13 +38,15 @@
                                         <thead>
                                         <tr>
                                             <th>Fecha</th>
+                                            <th>Nombre Cliente</th>
+                                            <th>Numero Cliente</th>
                                             <th>Productos</th>
                                             <th style='width: 8em;'>N° Productos</th>
                                             <th>Total Bs</th>
                                             <th>Total $</th>
                                             <th>Metodo Pago</th>
                                             <th class="text-center" style="width: 10em;">Usuario</th>
-                                            <th class="text-center" style="width: 10em;">Pagar</th>
+                                            <th class="text-center" style="width: 10em;">Abonar</th>
                                         </tr>
                                         </thead>
                                         <tbody id="cuerpo_tabla_productos">

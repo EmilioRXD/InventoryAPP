@@ -22,6 +22,9 @@
  esta_buscando = undefined,
  busqueda_anterior = undefined;
 
+ var precioVerde = $("#dolar").text();
+
+
 var delay = (function () {
  var timer = 0;
  return function (callback, ms) {
@@ -528,9 +531,11 @@ function dibujar_todos_los_productos(productos) {
              $('<tr>')
                  .append(
                      $('<td style="word-wrap: break-word; white-space: normal;">').html(productos[i].fecha),
-                     $('<td>').html("Falta dato"),
+                     $('<td>').html(productos[i].nombre_cliente),
+                     $('<td>').html(productos[i].numero_cliente),
+                     $('<td>').html("Falta Dato"),
                      $('<td>').html(productos[i].numero_productos),
-                     $('<td>').html("Bs. " + productos[i].total_bs),
+                     $('<td>').html("Bs. " + (productos[i].total * precioVerde).toFixed(2)),
                      $('<td>').html("$ " + productos[i].total),
                      $('<td>').html(productos[i].metodo_pago),
                      $('<td class="text-center">').html(productos[i].usuario),

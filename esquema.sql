@@ -214,6 +214,32 @@ LOCK TABLES `ventas` WRITE;
 /*!40000 ALTER TABLE `ventas` DISABLE KEYS */;
 /*!40000 ALTER TABLE `ventas` ENABLE KEYS */;
 UNLOCK TABLES;
+
+DROP TABLE IF EXISTS `creditos`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `creditos` (
+  `nombre_cliente` text NOT NULL,
+  `numero_cliente` bigint NOT NULL,
+  `codigo_producto` text NOT NULL,
+  `nombre_producto` text NOT NULL,
+  `total` decimal(11,2) NOT NULL,
+  `fecha` datetime NOT NULL,
+  `numero_productos` decimal(11,2) NOT NULL,
+  `metodo_pago` text NOT NULL,
+  `usuario` tinytext NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `creditos`
+--
+
+LOCK TABLES `creditos` WRITE;
+/*!40000 ALTER TABLE `creditos` DISABLE KEYS */;
+/*!40000 ALTER TABLE `creditos` ENABLE KEYS */;
+UNLOCK TABLES;
+
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;

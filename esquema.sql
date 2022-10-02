@@ -219,6 +219,7 @@ DROP TABLE IF EXISTS `creditos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `creditos` (
+  `numero_credito` int(11) NOT NULL,
   `nombre_cliente` text NOT NULL,
   `numero_cliente` bigint NOT NULL,
   `codigo_producto` text NOT NULL,

@@ -78,18 +78,13 @@ function hacer_credito($nombre_cliente, $numero_cliente, $productos, $total, $me
 
     global $base_de_datos;
     require_once "../inventario/inventario.php";
-    $numero_venta = ultimo_numero_de_venta();
+    $numero_credito = ultimo_numero_de_credito();
     $todo_correcto = true;
     foreach ($productos as $producto) {
         $todo_correcto = $todo_correcto and quitar_piezas($producto->cantidad, $producto->rowid);
-        $sentencia = $base_de_datos->prepare("INSERT INTO creditos(nombre_cliente, numero_cliente, codigo_producto, nombre_producto, total, fecha, numero_productos, metodo_pago, usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?);");
-        $resultado_sentencia = $sentencia->execute(array($nombre_cliente, $numero_cliente, $producto->codigo, $producto->nombre, $total, date("Y-m-d H:i:s"), $producto->cantidad, $metodo_pago, $_SESSION["nombre_de_usuario"]));
+        $sentencia = $base_de_datos->prepare("INSERT INTO creditos(numero_credito, nombre_cliente, numero_cliente, codigo_producto, nombre_producto, total, fecha, numero_productos, metodo_pago, usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
+        $resultado_sentencia = $sentencia->execute(array($numero_credito, $nombre_cliente, $numero_cliente, $producto->codigo, $producto->nombre, $total, date("Y-m-d H:i:s"), $producto->cantidad, $metodo_pago, $_SESSION["nombre_de_usuario"]));
         $todo_correcto = $todo_correcto and $resultado_sentencia;
-    }
-    $todo_correcto = $todo_correcto and ingresar_dinero_venta_caja($total, $numero_venta);
-    if ($ticket === TRUE) {
-        include "../ticket.php";
-        imprime_ticket($productos, $numero_venta, $cambio);
     }
     return $todo_correcto;
 }
@@ -140,6 +135,16 @@ function ultimo_numero_de_venta()
     $fila = $sentencia->fetch();
     if ($fila === FALSE) return 1;
     return $fila["ultima_venta"] + 1;
+}
+
+function ultimo_numero_de_credito()
+{
+    global $base_de_datos;
+    $sentencia = $base_de_datos->prepare("SELECT numero_credito AS ultimo_credito FROM creditos ORDER BY numero_credito DESC LIMIT 1;");
+    $sentencia->execute();
+    $fila = $sentencia->fetch();
+    if ($fila === FALSE) return 1;
+    return $fila["ultimo_credito"] + 1;
 }
 
 ?>

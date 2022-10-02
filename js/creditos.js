@@ -10,19 +10,55 @@
  *    Última modificación: 09 de junio de 2016 por Parzibyte
  *    Entorno: Desarrollo
  */
- var $mostrar_resultados = $("p#mostrar_resultados"),
- $contenedor_productos = $("#cuerpo_tabla_productos"),
- OFFSET = 0,
- LIMITE = 7,
- id_temporal_ayudante = undefined,
- esta_editando = undefined,
- tooltip_esta_mostrado = undefined,
- ayudante_cantidad = undefined,
- numero_total_productos = undefined,
- esta_buscando = undefined,
- busqueda_anterior = undefined;
+var $mostrar_resultados = $("p#mostrar_resultados"),
+$contenedor_productos = $("#cuerpo_tabla_productos"),
+OFFSET = 0,
+LIMITE = 7,
+id_temporal_ayudante = undefined,
+esta_editando = undefined,
+tooltip_esta_mostrado = undefined,
+ayudante_cantidad = undefined,
+numero_total_productos = undefined,
+esta_buscando = undefined,
+busqueda_anterior = undefined;
 
- var precioVerde = $("#dolar").text();
+var precioVerde = $("#dolar").text();
+
+ function Producto(numero, nombre) {
+    this.numero = numero;
+    this.nombre = nombre;
+}
+
+function Venta(numero_credito, fecha, nombre_cliente, numero_cliente, nombre_producto, numero_productos, total, metodo_pago, usuario) {
+    this.numero_credito = numero_credito;
+    this.fecha = fecha;
+    this.nombre_cliente = nombre_cliente;
+    this.numero_cliente = numero_cliente;
+    this.lista_productos = [];
+    this.numero_productos = parseFloat(numero_productos);
+    this.total = total;
+    this.lista_productos.push(new Producto(numero_productos, nombre_producto));
+    this.metodo_pago = metodo_pago;
+    this.usuario = usuario;
+}
+
+Venta.prototype.agrega_producto_lista = function (numero_productos, nombre_producto) {
+    this.numero_productos += parseFloat(numero_productos);
+    this.lista_productos.push(new Producto(numero_productos, nombre_producto));
+};
+
+Venta.prototype.productos_como_html = function () {
+    var foo = "";
+    for (var i = this.lista_productos.length - 1; i >= 0; i--) {
+        foo +=
+            this.lista_productos[i].nombre.toString()
+            + ": <strong>"
+            + this.lista_productos[i].numero.toString()
+            + "</strong>"
+            + "<br>";
+    }
+    return foo;
+};
 
 
 var delay = (function () {
@@ -518,14 +554,7 @@ function dibujar_todos_los_productos(productos) {
      .show();
 
  $("#buscar_producto").prop("disabled", false);
- var nombre_producto, codigo_producto;
  for (var i = 0; i < productos.length; i++) {
-     nombre_producto = productos[i].nombre_producto;
-     codigo_producto = productos[i].codigo_producto;
-     if (esta_buscando === true) {
-         nombre_producto = nombre_producto.replace($("#buscar_producto").val(), "<kbd>" + $("#buscar_producto").val() + "</kbd>");
-         codigo_producto = codigo_producto.replace($("#buscar_producto").val(), "<kbd>" + $("#buscar_producto").val() + "</kbd>");
-     }
      $contenedor_productos
          .append(
              $('<tr>')
@@ -562,6 +591,119 @@ function dibujar_todos_los_productos(productos) {
                  )
          );
  }
+}
+
+function dame_posicion_credito(creditos, numero_credito) {
+    for (var i = creditos.length - 1; i >= 0; i--) {
+        if (creditos[i].numero_credito === numero_credito) return i;
+    }
+    return -1;
+}
+
+
+function dibuja_tabla_creditos(creditos) {
+    $contenedor_productos.empty();
+ if (creditos.length <= 0) {
+     $("#cargar_productos_nuevos, #cargar_productos_antiguos").hide();
+     var html_contenedor = "<tr><td colspan='7'>"
+         + "<h2 class='text-center'>"
+         + "<i class='fa fa-4x fa-archive'></i><br>"
+         + "Todavía no hay productos <br>"
+         + "<small>Agrega unos con el formulario de la izquierda</small></h2>"
+         + "</td></tr>";
+
+     if (esta_buscando === true) {
+         html_contenedor = "<tr><td colspan='7'>"
+             + "<h2 class='text-center'>"
+             + "<i class='fa fa-4x fa-frown-o'></i><br>"
+             + "Ningún producto coincide con tu búsqueda <br>"
+             + "<small>Comprueba tu ortografía e inténtalo de nuevo</small></h2>"
+             + "</td></tr>";
+     }
+     $contenedor_productos
+         .append(html_contenedor)
+         .parent()
+         .find("thead")
+         .hide();
+     if (esta_buscando !== true) {
+         $("#buscar_producto").prop("disabled", true);
+     }
+     return;
+ }
+ $("#cargar_productos_nuevos, #cargar_productos_antiguos").show();
+ $contenedor_productos
+     .parent()
+     .find("thead")
+     .show();
+
+ $("#buscar_producto").prop("disabled", false);
+     
+    var ayudante_numero_credito = undefined,
+        numero_productos = 0.0;
+    var creditos_totales = [];
+    var subtotal = 0;
+    for (var i = creditos.length - 1; i >= 0; i--) {
+        subtotal = creditos[i].total;
+        if (ayudante_numero_credito === creditos[i].numero_credito) {
+            var posicion = dame_posicion_venta(creditos_totales, creditos[i].numero_credito);
+            creditos_totales[posicion].agrega_producto_lista(creditos[i].numero_productos, creditos[i].nombre_producto);
+            creditos_totales[posicion].total = parseFloat(creditos_totales[posicion].total) + parseFloat(subtotal);
+            numero_productos += parseFloat(creditos[i].numero_productos);
+        } else {
+            creditos_totales.push(
+                new Venta(
+                    productos[i].numero_credito,
+                    productos[i].fecha,
+                    productos[i].nombre_cliente,
+                    productos[i].numero_cliente,
+                    productos[i].nombre_producto,
+                    parseFloat(productos[i].numero_productos),
+                    subtotal,
+                    productos[i].metodo_pago,
+                    productos[i].usuario
+                )
+            );
+            ayudante_numero_credito = productos[i].numero_credito;
+        }
+    }
+    
+    for (var i = creditos_totales.length - 1; i >= 0; i--) {
+        $contenedor_productos
+            .append(
+                $("<tr>")
+                    .append(
+                        $("<td class='text-center'>").html(creditos_totales[i].fecha),
+                        $('<td>').html(creditos_totales[i].nombre_cliente),
+                        $('<td>').html(creditos_totales[i].numero_cliente),
+                        $("<td>").html(creditos_totales[i].productos_como_html()),
+                        $('<td>').html(creditos_totales[i].numero_productos),
+                        $('<td>').html("Bs. " + (creditos_totales[i].total * precioVerde).toFixed(2)),
+                        $('<td>').html("$ " + creditos_totales[i].total),
+                        $('<td>').html(creditos_totales[i].metodo_pago),
+                        $('<td class="text-center">').html(creditos_totales[i].usuario),
+                        $('<td>')
+                            .append(
+                                $("<div class='col text-center' style='padding: 0;'>")
+                                    .append(
+                                        $("<button data-id = '" + creditos_totales[i].numero_credito + "'>")
+                                            .addClass('agregar-piezas btn-ms btn-success')
+                                            .html(
+                                                $("<i>")
+                                                    .addClass('fa fa-plus-circle')
+                                            )
+                                    )
+                                    .append(
+                                        $("<button data-id = '" + creditos_totales[i].numero_credito + "'>")
+                                            .addClass('eliminar btn-ms btn-danger')
+                                            .html(
+                                                $("<i>")
+                                                    .addClass('fa fa-trash')
+                                            )
+                                    )
+                            )
+                    )
+            );
+    }
 }
 
 
@@ -696,7 +838,6 @@ function consultar_todos_los_creditos() {
  }, function (respuesta) {
      respuesta = JSON.parse(respuesta);
      dibujar_todos_los_productos(respuesta);
-     consultar_numero_total_productos();
  });
 }
 

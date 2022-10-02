@@ -5,7 +5,6 @@ if (!defined("RAIZ")) {
 }
 require_once RAIZ . "/modulos/db.php";
 require_once RAIZ . "/modulos/creditos/creditos.php";
-
 $limite = $_POST["limite"];
 $offset = $_POST["offset"];
 $todos_los_creditos = consultar_todos_los_creditos( $limite, $offset );

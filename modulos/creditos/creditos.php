@@ -6,3 +6,10 @@ function consultar_todos_los_creditos($limite, $offset)
     $sentencia->execute([$limite, $offset]);
     return $sentencia->fetchAll();
 }
+
+function eliminar_credito($rowid)
+{
+    global $base_de_datos;
+    $sentencia = $base_de_datos->prepare("DELETE FROM creditos WHERE numero_credito = ?");
+    return $sentencia->execute([$rowid]);
+}

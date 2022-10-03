@@ -28,6 +28,42 @@
         </div>
     </div>
 
+    <!--
+    #####################################################################################Comienzan los modal
+    -->
+    <div id="modal_confirmar" class="modal fade" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Confirmar</h4>
+                </div>
+                <div class="modal-body">
+                    <p class="h5">¿Realmente deseas eliminar el credito? Esta opción no se puede deshacer.</p>
+                </div>
+                <div class="modal-footer">
+                    <div class="row">
+                        <div class="col-xs-12">
+                            <div hidden="hidden" class="alert">
+                                <span id="mostrar_resultados_eliminar"></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-6">
+                            <button id="eliminar_producto" class="form-control btn btn-danger">Eliminar</button>
+                        </div>
+                        <div class="col-xs-6">
+                            <button id="cancelar_confirmacion_eliminar" data-dismiss="modal"
+                                    class="form-control btn btn-warning">Cancelar
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- SCRIPTS -->
     <!-- jQuery 2.1.3 -->
     <script src="./public/plugins/jQuery/jQuery-2.1.3.min.js"></script>

@@ -164,7 +164,7 @@ function dibuja_tabla_creditos(creditos) {
             .append(
                 $("<tr>")
                     .append(
-                        $("<td style='word-wrap: break-word; white-space: normal;'>").html(creditos_totales[i].fecha),
+                        $("<td class='text-center'>").html(creditos_totales[i].fecha),
                         $("<td>").html(creditos_totales[i].nombre_cliente),
                         $("<td>").html(creditos_totales[i].numero_cliente),
                         $("<td>").html(creditos_totales[i].productos_como_html()),
@@ -189,11 +189,88 @@ function dibuja_tabla_creditos(creditos) {
                                             .addClass('eliminar btn-ms btn-danger')
                                             .html(
                                                 $("<i>")
-                                                    .addClass('fa fa-trash')
+                                                    .addClass('fa fa-ban')
                                             )
                                     )
                             )
                     )
             );
     }
+}
+
+// Botones
+
+$(document).on("click", ".eliminar, .agregar-piezas", function () {
+    $("button[data-toggle='tooltip']").tooltip("hide");
+    tooltip_esta_mostrado = false;
+});
+
+$(document).on("click", "button[data-toggle='tooltip']", function () {
+    if (tooltip_esta_mostrado) {
+        $(this).tooltip("hide");
+        tooltip_esta_mostrado = false;
+    } else {
+        $(this).tooltip("show");
+        tooltip_esta_mostrado = true;
+    }
+});
+
+$(document).on("click", ".eliminar", function (evento) {
+    id_temporal_ayudante = $(this).data("id");
+    $("#modal_confirmar").modal("show");
+});
+
+$(document).on("click", ".agregar-piezas", function (evento) {
+    id_temporal_ayudante = $(this).data("id");
+    $("#modal_agregar_piezas").modal("show");
+});
+
+$("#eliminar_producto").click(function () {
+    $("#mostrar_resultados_eliminar")
+        .html('<i class="fa fa-spin fa-spinner"></i> Eliminando...')
+        .parent()
+        .removeClass('alert-success alert-warning')
+        .addClass('alert-warning')
+        .show("slow");
+    deshabilitar_para_eliminar();
+    eliminar_producto(id_temporal_ayudante);
+});
+
+function eliminar_producto(id_temporal_ayudante) {
+    $.post('./modulos/creditos/eliminar_credito.php', {rowid: id_temporal_ayudante}, function (respuesta) {
+        respuesta = JSON.parse(respuesta);
+        if (respuesta === true) {
+            $("#mostrar_resultados_eliminar")
+                .html("<i class='fa fa-check'></i>¡Correcto!")
+                .parent()
+                .removeClass("alert-warning alert-success")
+                .addClass('alert-success')
+                .delay(200)
+                .hide("slow", function () {
+                    $("#modal_confirmar").modal("hide");
+                    habilitar_para_eliminar();
+                })
+                consultar_todos_los_creditos();
+        } else {
+            $("#mostrar_resultados_eliminar")
+                .html("<strong>Error: </strong>" + respuesta.toString())
+                .parent()
+                .removeClass("alert-warning alert-success")
+                .addClass('alert-danger')
+                .delay(2000)
+                .hide("slow", function () {
+                    $("#modal_confirmar").modal("hide");
+                    habilitar_para_eliminar();
+                })
+        }
+    });
+}
+
+function deshabilitar_para_eliminar() {
+    $("#cancelar_confirmacion_eliminar, #eliminar_producto").prop("disabled", true);
+}
+
+
+function habilitar_para_eliminar() {
+    $("#cancelar_confirmacion_eliminar, #eliminar_producto").prop("disabled", false);
 }

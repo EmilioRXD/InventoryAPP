@@ -418,9 +418,9 @@ function escuchar_elementos() {
         }
     })
 
-    $("#imprimir_ticket").click(function () {
-        $("#pago_usuario").focus();
-    });
+    // $("#imprimir_ticket").click(function () {
+    //     $("#pago_usuario").focus();
+    // });
 
     $(window).resize(function (event) {
         $("#codigo_producto").css("width", $(".btn-group.btn-group-justified").width());
@@ -454,6 +454,9 @@ function escuchar_elementos() {
             $("#pago_usuario").val("").prop('disabled', false);
         }
     });
+    $("#nombre_cliente").keyup(function () {
+        $(this).parent().removeClass('has-error');
+    })
     $("#pago_usuario").keyup(function (evento) {
         $(this).parent().removeClass('has-error');
         var pago = $(this).val();
@@ -506,9 +509,11 @@ function escuchar_elementos() {
             cambio = pago - total;
         if (cambio >= 0 && !isNaN(pago) && valor != 4) {
             realizar_venta(productos_vender, total, totalBs, precioVerde, metodo_pago, cambio, $("#imprimir_ticket").prop("checked"));
-        } else if (cambio >= 0 && !isNaN(pago) && valor == 4){
+        } else if (cambio >= 0 && !isNaN(pago) && valor == 4 && nombre_cliente != ""){
             realizar_credito(nombre_cliente, numero_cliente, productos_vender, total, metodo_pago, cambio, $("#imprimir_ticket").prop("checked"));
         } else {
+            $("#nombre_cliente").animateCss("shake");
+            $("#nombre_cliente").parent().addClass('has-error');
             $("#pago_usuario").animateCss("shake");
             $("#pago_usuario").parent().addClass('has-error');
         }
@@ -519,7 +524,7 @@ function escuchar_elementos() {
 
 
     $("#modal_procesar_venta").on("shown.bs.modal", function () {
-        $("#pago_usuario").focus();
+        $("#metodo_pago").focus();
     });
     $("#modal_procesar_venta").on("hidden.bs.modal", function () {
         $("#realizar_venta").html("Realizar venta");

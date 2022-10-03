@@ -110,11 +110,11 @@
 
                             <div class="credito_input form-group hidden">
                                 <label for="nombre_cliente">Nombre Cliente</label>
-                                <input class="form-control" type="text" placeholder="Ingrese el cliente al que se le realiza el crédito" id="nombre_cliente">
+                                <input class="credito_input form-control" type="text" placeholder="Ingrese el cliente al que se le realiza el crédito" id="nombre_cliente">
                             </div>
                             <div class="credito_input form-group hidden">
-                                <label for="numero_cliente">Número de Telefono</label>
-                                <input class="form-control" type="number" placeholder="Ingrese el número de contacto" id="numero_cliente">
+                                <label for="numero_cliente">Número de Telefono (Opcional)</label>
+                                <input class="credito_input form-control" type="number" placeholder="Ingrese el número de contacto" id="numero_cliente">
                             </div>
 
                             <!-- TICKET -->

@@ -14,7 +14,10 @@ var un_dia_en_milisegundos = (24 * 60 * 60 * 1000),
     ayudante_total = 0,
     ayudante_utilidad = 0.0,
     OFFSET = 0,
-    LIMITE = 1000;
+    LIMITE = 1000,
+    deuda = 0,
+    abono_verde = 0,
+    abono_bs = 0;
 
 var precioVerde = $("#dolar").text();
 
@@ -178,20 +181,20 @@ function dibuja_tabla_creditos(creditos) {
                                 $("<div class='col text-center' style='padding: 0;'>")
                                     .append(
                                         $("<button data-id = '" + creditos_totales[i].numero_credito + "'>")
-                                            .addClass('agregar-piezas btn-ms btn-success')
+                                            .addClass('editar btn-ms btn-success')
                                             .html(
                                                 $("<i>")
                                                     .addClass('fa fa-plus-circle')
                                             )
                                     )
-                                    .append(
-                                        $("<button data-id = '" + creditos_totales[i].numero_credito + "'>")
-                                            .addClass('eliminar btn-ms btn-danger')
-                                            .html(
-                                                $("<i>")
-                                                    .addClass('fa fa-ban')
-                                            )
-                                    )
+                                    // .append(
+                                    //     $("<button data-id = '" + creditos_totales[i].numero_credito + "'>")
+                                    //         .addClass('eliminar btn-ms btn-danger')
+                                    //         .html(
+                                    //             $("<i>")
+                                    //                 .addClass('fa fa-ban')
+                                    //         )
+                                    // )
                             )
                     )
             );
@@ -200,7 +203,7 @@ function dibuja_tabla_creditos(creditos) {
 
 // Botones
 
-$(document).on("click", ".eliminar, .agregar-piezas", function () {
+$(document).on("click", ".eliminar, .editar", function () {
     $("button[data-toggle='tooltip']").tooltip("hide");
     tooltip_esta_mostrado = false;
 });
@@ -220,9 +223,14 @@ $(document).on("click", ".eliminar", function (evento) {
     $("#modal_confirmar").modal("show");
 });
 
-$(document).on("click", ".agregar-piezas", function (evento) {
+$(document).on("click", ".editar", function (evento) {
     id_temporal_ayudante = $(this).data("id");
-    $("#modal_agregar_piezas").modal("show");
+    $("#modal_abonar").modal("show");
+    $("#abono_verde").val(0);
+    $("#abono_bs").val(0);
+    abono_bs = 0;
+    abono_verde = 0;
+    consultar_credito(id_temporal_ayudante);
 });
 
 $("#eliminar_producto").click(function () {
@@ -233,11 +241,11 @@ $("#eliminar_producto").click(function () {
         .addClass('alert-warning')
         .show("slow");
     deshabilitar_para_eliminar();
-    eliminar_producto(id_temporal_ayudante);
+    eliminar_credito(id_temporal_ayudante);
 });
 
-function eliminar_producto(id_temporal_ayudante) {
-    $.post('./modulos/creditos/eliminar_credito.php', {rowid: id_temporal_ayudante}, function (respuesta) {
+function eliminar_credito(id_temporal_ayudante) {
+    $.post('./modulos/creditos/eliminar_credito.php', {numero_credito: id_temporal_ayudante}, function (respuesta) {
         respuesta = JSON.parse(respuesta);
         if (respuesta === true) {
             $("#mostrar_resultados_eliminar")
@@ -273,4 +281,92 @@ function deshabilitar_para_eliminar() {
 
 function habilitar_para_eliminar() {
     $("#cancelar_confirmacion_eliminar, #eliminar_producto").prop("disabled", false);
+}
+
+$("#abonar").click(function () {
+    $("#mostrar_resultados_abonar")
+        .html('<i class="fa fa-spin fa-spinner"></i> Abonando...')
+        .parent()
+        .removeClass('alert-success alert-warning')
+        .addClass('alert-warning')
+        .show("slow");
+    deshabilitar_para_abonar();
+    abono_verde = $("#abono_verde").val();
+    abono_bs    = $("#abono_bs").val();
+    monto = deuda - (abono_verde + (abono_bs/precioVerde));
+    if(monto > 0){
+        abonar_credito(id_temporal_ayudante, monto);
+    }else if (monto == 0) {
+        eliminar_credito(id_temporal_ayudante);
+        $("#mostrar_resultados_abonar")
+            .html("<i class='fa fa-check'></i>¡Correcto!")
+            .parent()
+            .removeClass("alert-warning alert-success")
+            .addClass('alert-success')
+            .delay(200)
+            .hide("slow", function () {
+                $("#modal_abonar").modal("hide");
+                habilitar_para_abonar();
+            })
+            consultar_todos_los_creditos();
+    } else {
+        $("#mostrar_resultados_abonar")
+            .html("<strong>Error</strong>")
+            .parent()
+            .removeClass("alert-warning alert-success")
+            .addClass('alert-danger')
+            .delay(2000)
+            .hide("slow", function () {
+                $("#modal_abonar").modal("hide");
+                habilitar_para_abonar();
+            })
+    }
+});
+
+function deshabilitar_para_abonar() {
+    $("#abonar").prop("disabled", true);
+}
+
+
+function habilitar_para_abonar() {
+    $("#abonar").prop("disabled", false);
+}
+
+function consultar_credito(id_temporal_ayudante) {
+    $.post('./modulos/creditos/consultar_credito.php', {numero_credito: id_temporal_ayudante}, function (respuesta) {
+        respuesta = JSON.parse(respuesta);
+        $("#contenedor_total").text("Bs. " + (respuesta.total*precioVerde).toFixed(2));
+        $("#contenedor_total_verde").text("$ " + respuesta.total);
+        deuda = respuesta.total
+    });
+}
+
+function abonar_credito(id_temporal_ayudante, monto) {
+    $.post('./modulos/creditos/abonar_credito.php', {numero_credito: id_temporal_ayudante, total: monto}, function (respuesta) {
+        respuesta = JSON.parse(respuesta);
+        if (respuesta === true) {
+            $("#mostrar_resultados_abonar")
+                .html("<i class='fa fa-check'></i>¡Correcto!")
+                .parent()
+                .removeClass("alert-warning alert-success")
+                .addClass('alert-success')
+                .delay(200)
+                .hide("slow", function () {
+                    $("#modal_abonar").modal("hide");
+                    habilitar_para_abonar();
+                })
+                consultar_todos_los_creditos();
+        } else {
+            $("#mostrar_resultados_abonar")
+                .html("<strong>Error: </strong>" + respuesta.toString())
+                .parent()
+                .removeClass("alert-warning alert-success")
+                .addClass('alert-danger')
+                .delay(2000)
+                .hide("slow", function () {
+                    $("#modal_abonar").modal("hide");
+                    habilitar_para_abonar();
+                })
+        }
+    });
 }

@@ -337,7 +337,7 @@ function realizar_venta(productos, total, totalBs, precioVerde, metodo_pago, cam
 
 /* funcion que realiza la venta, captura los datos del usuario y lo guarda en la base de datos */
 
-function realizar_credito(nombre_cliente, numero_cliente, productos, total, metodo_pago, cambio, ticket) {
+function realizar_credito(nombre_cliente, numero_cliente, productos, total, totalBs, precioVerde, metodo_pago, cambio, ticket) {
     cambio = parseFloat(cambio);
     if (cambio < 0) cambio = 0;
     deshabilita_para_venta();
@@ -358,6 +358,8 @@ function realizar_credito(nombre_cliente, numero_cliente, productos, total, meto
         "numero_cliente":numero_cliente,
         "productos": productos,
         "total": total,
+        "total_bs": totalBs,
+        "precio_verde": precioVerde,
         "metodo_pago": metodo_pago,
         "ticket": ticket,
         "cambio": cambio
@@ -510,13 +512,14 @@ function escuchar_elementos() {
         if (cambio >= 0 && !isNaN(pago) && valor != 4) {
             realizar_venta(productos_vender, total, totalBs, precioVerde, metodo_pago, cambio, $("#imprimir_ticket").prop("checked"));
         } else if (cambio >= 0 && !isNaN(pago) && valor == 4 && nombre_cliente != ""){
-            realizar_credito(nombre_cliente, numero_cliente, productos_vender, total, metodo_pago, cambio, $("#imprimir_ticket").prop("checked"));
+            realizar_credito(nombre_cliente, numero_cliente, productos_vender, total, totalBs, precioVerde, metodo_pago, cambio, $("#imprimir_ticket").prop("checked"));
         } else {
             $("#nombre_cliente").animateCss("shake");
             $("#nombre_cliente").parent().addClass('has-error');
             $("#pago_usuario").animateCss("shake");
             $("#pago_usuario").parent().addClass('has-error');
         }
+        $(".credito_input").addClass("hidden").val("");
     });
 
     /* Integrar datos que se alojaran en la base datos */
@@ -524,7 +527,10 @@ function escuchar_elementos() {
 
 
     $("#modal_procesar_venta").on("shown.bs.modal", function () {
-        $("#metodo_pago").focus();
+        $("#chkEfectivoExacto").prop('checked', false);
+        $("#metodo_pago").focus().val(2);
+        $(".credito").show();
+        $(".credito_input").addClass("hidden").val("");
     });
     $("#modal_procesar_venta").on("hidden.bs.modal", function () {
         $("#realizar_venta").html("Realizar venta");

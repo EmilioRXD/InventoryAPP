@@ -71,7 +71,7 @@ function hacer_venta($productos, $total, $total_bs, $precio_verde, $metodo_pago,
     return $todo_correcto;
 }
 
-function hacer_credito($nombre_cliente, $numero_cliente, $productos, $total, $metodo_pago, $ticket, $cambio)
+function hacer_credito($nombre_cliente, $numero_cliente, $productos, $total, $total_bs, $precio_verde, $metodo_pago, $ticket, $cambio)
 {
     #Definir Zona Horaria
     date_default_timezone_set('America/Caracas');
@@ -79,12 +79,18 @@ function hacer_credito($nombre_cliente, $numero_cliente, $productos, $total, $me
     global $base_de_datos;
     require_once "../inventario/inventario.php";
     $numero_credito = ultimo_numero_de_credito();
+    $numero_venta = ultimo_numero_de_venta();
     $todo_correcto = true;
     foreach ($productos as $producto) {
         $todo_correcto = $todo_correcto and quitar_piezas($producto->cantidad, $producto->rowid);
         $sentencia = $base_de_datos->prepare("INSERT INTO creditos(numero_credito, nombre_cliente, numero_cliente, codigo_producto, nombre_producto, total, fecha, numero_productos, metodo_pago, usuario) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?);");
         $resultado_sentencia = $sentencia->execute(array($numero_credito, $nombre_cliente, $numero_cliente, $producto->codigo, $producto->nombre, $total, date("Y-m-d H:i:s"), $producto->cantidad, $metodo_pago, $_SESSION["nombre_de_usuario"]));
         $todo_correcto = $todo_correcto and $resultado_sentencia;
+        if ($todo_correcto == true) {
+            $sentencia_2 = $base_de_datos->prepare("INSERT INTO ventas(numero_venta, codigo_producto, nombre_producto, total, total_bs, precio_verde, fecha, numero_productos, metodo_pago, usuario, familia, utilidad) VALUES (?,?,?,?,?,?,?,?,?,?, ?, ?);");
+            $resultado_sentencia_2 = $sentencia_2->execute(array($numero_venta, $producto->codigo, $producto->nombre, $producto->cantidad * $producto->precio_venta, $total_bs, $precio_verde, date("Y-m-d H:i:s"), $producto->cantidad, $metodo_pago, $_SESSION["nombre_de_usuario"], $producto->familia, $producto->utilidad * $producto->cantidad));
+            $todo_correcto = $todo_correcto and $resultado_sentencia_2;
+        }
     }
     return $todo_correcto;
 }

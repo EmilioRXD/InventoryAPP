@@ -6,8 +6,7 @@
         ?>
 
         <div class="row visible-print-block">
-            <h1 class="text-center">Reporte sobre ventas</h1><br>
-            <h4 class="text-center">Precio Dolar: Bs. <?php echo $precio_dolar;?></h2>
+            <h1 class="text-center">Reporte Créditos</h1>
         </div>
 
         <div class="content-wrapper" style="margin: 0;" id="quitar">

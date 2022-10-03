@@ -219,16 +219,20 @@ DROP TABLE IF EXISTS `creditos`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `creditos` (
+  `delet` tinyint(11) NOT NULL,
   `numero_credito` int(11) NOT NULL,
   `nombre_cliente` text NOT NULL,
   `numero_cliente` bigint NOT NULL,
   `codigo_producto` text NOT NULL,
   `nombre_producto` text NOT NULL,
   `total` decimal(11,2) NOT NULL,
+  `totalR` decimal(11,2) NOT NULL,
   `fecha` datetime NOT NULL,
   `numero_productos` decimal(11,2) NOT NULL,
   `metodo_pago` text NOT NULL,
-  `usuario` tinytext NOT NULL
+  `usuario` tinytext NOT NULL,
+  `familia` tinytext NOT NULL,
+  `utilidad` decimal(8,2) unsigned NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 

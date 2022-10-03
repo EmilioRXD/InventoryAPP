@@ -66,7 +66,7 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
                         <a href="./ventas"><i class="fa fa-shopping-cart"></i> Ventas</a>
                     </li>
                     <li class="treeview">
-                        <a href="./creditos"><i class="fa fa-credit-card"></i> Credito</a>
+                        <a href="./creditos"><i class="fa fa-credit-card"></i> Créditos</a>
                     </li>
                     <li class="treeview">
                         <a href="./inventarios"><i class="fa fa-cubes"></i> Inventarios</a>
@@ -87,6 +87,7 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
                         <li><a href="./reportes-inventarios">Inventarios</a></li>
                         <li><a href="./reportes-bajas-inventario">Bajas de inventario</a></li>
                         <li><a href="./reportes-ventas">Ventas</a></li>
+                        <li><a href="./reportes-creditos">Créditos</a></li>
                         <li><a href="./reportes-gastos">Gastos</a></li>
                         <li><a href="./productos-en-stock">Productos en stock</a></li>
                         </ul>

@@ -26,7 +26,8 @@ function Producto(numero, nombre) {
     this.nombre = nombre;
 }
 
-function Venta(numero_credito, fecha, nombre_cliente, numero_cliente, nombre_producto, numero_productos, total, metodo_pago, usuario) {
+function Venta(delet, numero_credito, fecha, nombre_cliente, numero_cliente, nombre_producto, numero_productos, total, totalR, metodo_pago, usuario, familia, utilidad) {
+    this.delet = delet;
     this.numero_credito = numero_credito;
     this.fecha = fecha;
     this.nombre_cliente = nombre_cliente;
@@ -34,9 +35,12 @@ function Venta(numero_credito, fecha, nombre_cliente, numero_cliente, nombre_pro
     this.lista_productos = [];
     this.numero_productos = parseFloat(numero_productos);
     this.total = total;
+    this.totalR = totalR;
     this.lista_productos.push(new Producto(numero_productos, nombre_producto));
     this.metodo_pago = metodo_pago;
-    this.usuario = usuario;
+    this.usuario = usuario,
+    this.familia = familia,
+    this.utilidad = utilidad;
 }
 
 Venta.prototype.agrega_producto_lista = function (numero_productos, nombre_producto) {
@@ -83,11 +87,22 @@ function dame_posicion_venta(creditos, numero_credito) {
 }
 
 function dibuja_tabla_creditos(creditos) {
-    $("#mostrar_total").text("").parent().hide();
-    $("#generar_reporte").hide();
-    $("#contenedor_tabla")
-        .empty();
-    if (creditos.length <= 0) return;
+    $("#contenedor_tabla").empty();
+    if (creditos.length <= 0){
+        var html_contenedor = "<div>"
+            + "<h2 class='text-center'>"
+            + "<i class='fa fa-4x fa-archive'></i><br>"
+            + "Todavía no hay créditos <br>"
+            + "</h2>"
+            + "</div>";
+
+            $("#contenedor_tabla")
+            .append(html_contenedor)
+            .parent()
+            .find("thead")
+            .hide();
+        return;
+    }
     ayudante_total = 0;
     $("#contenedor_tabla")
         .append(
@@ -138,16 +153,24 @@ function dibuja_tabla_creditos(creditos) {
         numero_productos = 0.0;
     var creditos_totales = [];
     var subtotal = 0;
+    var subtotalR = 0;
+    var subtotal_utilidad = 0;
     for (var i = creditos.length - 1; i >= 0; i--) {
         subtotal = creditos[i].total;
+        subtotalR = creditos[i].totalR;
+        subtotal_utilidad = creditos[i].utilidad;
         if (ayudante_numero_credito === creditos[i].numero_credito) {
             var posicion = dame_posicion_venta(creditos_totales, creditos[i].numero_credito);
             creditos_totales[posicion].agrega_producto_lista(creditos[i].numero_productos, creditos[i].nombre_producto);
             creditos_totales[posicion].total = parseFloat(creditos_totales[posicion].total);
+            creditos_totales[posicion].totalR = parseFloat(creditos_totales[posicion].totalR);
+            creditos_totales[posicion].utilidad = parseFloat(creditos_totales[posicion].utilidad) + parseFloat(subtotal_utilidad);
             numero_productos += parseFloat(creditos[i].numero_productos);
+            
         } else {
             creditos_totales.push(
                 new Venta(
+                    creditos[i].delet,
                     creditos[i].numero_credito,
                     creditos[i].fecha,
                     creditos[i].nombre_cliente,
@@ -155,8 +178,11 @@ function dibuja_tabla_creditos(creditos) {
                     creditos[i].nombre_producto,
                     parseFloat(creditos[i].numero_productos),
                     subtotal,
+                    subtotalR,
                     creditos[i].metodo_pago,
-                    creditos[i].usuario
+                    creditos[i].usuario,
+                    creditos[i].familia,
+                    subtotal_utilidad
                 )
             );
             ayudante_numero_credito = creditos[i].numero_credito;
@@ -228,8 +254,6 @@ $(document).on("click", ".editar", function (evento) {
     $("#modal_abonar").modal("show");
     $("#abono_verde").val(0);
     $("#abono_bs").val(0);
-    abono_bs = 0;
-    abono_verde = 0;
     consultar_credito(id_temporal_ayudante);
 });
 
@@ -291,9 +315,20 @@ $("#abonar").click(function () {
         .addClass('alert-warning')
         .show("slow");
     deshabilitar_para_abonar();
+    var abono_bs = 0,
+        abono_verde = 0,
+        monto_1 = 0;
+        monto_2 = 0;
+        monto = 0;
     abono_verde = $("#abono_verde").val();
     abono_bs    = $("#abono_bs").val();
-    monto = deuda - (abono_verde + (abono_bs/precioVerde));
+    monto_1 = deuda - abono_verde;
+    monto_2 = deuda - (abono_bs/precioVerde)
+    if (abono_verde == 0){
+        monto += monto_2;
+    } else {
+        monto += monto_1
+    }
     if(monto > 0){
         abonar_credito(id_temporal_ayudante, monto);
     }else if (monto == 0) {

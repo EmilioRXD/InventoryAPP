@@ -17,7 +17,7 @@
                     <div class="col-sm-12">
                         <div class="box box-default">
                             <div class="box-body" style="min-height:40vh;">
-                                <h3 class="text-center">General</h3><br>
+                                <h3 class="text-center">Créditos</h3><br>
                                 <div id="contenedor_tabla" class="table-responsive">
                                 </div>
                             </div><!-- /.box-body -->

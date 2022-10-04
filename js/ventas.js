@@ -241,7 +241,7 @@ function dibujar_productos() {
                             ),
 
                         $("<td>")
-                            .html("Bs. " + Math.round(productos_vender[i].total * 100) / 100),
+                            .html("$ " + Math.round(productos_vender[i].total * 100) / 100),
 
                         $("<td>")
                             .html(

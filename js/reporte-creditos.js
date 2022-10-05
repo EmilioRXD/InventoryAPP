@@ -281,7 +281,7 @@ function dibuja_tabla_ventas(ventas) {
      if (ayudante_numero_credito === ventas[i].numero_credito) {
          var posicion = dame_posicion_venta(creditos_totales, ventas[i].numero_credito);
          creditos_totales[posicion].agrega_producto_lista(ventas[i].numero_productos, ventas[i].nombre_producto);
-         creditos_totales[posicion].totalR = parseFloat(creditos_totales[posicion].totalR) + parseFloat(subtotal);
+         creditos_totales[posicion].totalR = parseFloat(creditos_totales[posicion].totalR);
          creditos_totales[posicion].utilidad = parseFloat(creditos_totales[posicion].utilidad) + parseFloat(subtotal_utilidad);
          numero_productos += parseFloat(ventas[i].numero_productos);
      } else {

@@ -11,9 +11,9 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
             <!-- Main content -->
             <section class="content">
                 <div class="row">
-
+                    <div class="col-sm-4"></div>
                     <!-- Registro de Nuevo Producto -->
-                    <div class="col-xs-12 col-sm-4 col-md-offset-4 hidden" id="contenedor_formulario">
+                    <div class="col-xs-12 col-sm-4 hidden" id="contenedor_formulario">
                         <div class="box box-primary">
                             <div class="box-header with-border">
                                 <h4 class="text-center">Registrar nuevo producto</h4>
@@ -34,12 +34,25 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
                                     <input data-requerido="true" class="form-control" type="number" id="precio_compra"
                                         placeholder="Precio de compra">
                                 </div>
-                                <div class="form-group">
-                                    <label for="precio_venta">Precio de venta</label>
-                                    <input data-toggle="tooltip" title="El precio de venta no puede ser menor que el precio de compra."
-                                        data-placement="top" data-requerido="true" class="form-control" type="number" id="precio_venta"
-                                        placeholder="Precio de venta">
+                                <div class="row">
+                                    <div class="form-group col-sm-12">
+                                        <label for="precio_venta">Precio de venta</label>
+                                        <input data-toggle="tooltip" title="El precio de venta no puede ser menor que el precio de compra."
+                                            data-placement="top" data-requerido="true" class="form-control" type="number" id="precio_venta"
+                                            placeholder="Precio de venta">
+                                    </div>
+                                    <div class="form-group" hidden="hidden">
+                                        <label for="precio_venta">Porcentaje de utilidad</label>
+                                        <input data-toggle="tooltip" data-placement="top" data-requerido="true" class="form-control" type="number"
+                                            id="porcentaje_utilidad" placeholder="Porcentaje de utilidad">
+                                    </div>
+                                    <div class="credito checkbox col-sm-12">
+                                        <label>
+                                            <input type="checkbox" id="chkPorcentaje"> Porcentaje de Utilidad
+                                        </label>
+                                    </div>
                                 </div>
+                                
                                 <div class="form-group">
                                     <p hidden="hidden" class="h5"><strong>Utilidad: </strong>$ <span id="mostrar_utilidad"></span></p>
                                 </div>
@@ -54,7 +67,7 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
                                         placeholder="Cantidad mínima que puede existir">
                                 </div>
                                 <div class="form-group">
-                                    <label for="stock">Familia o proveedor</label>
+                                    <label for="stock">Rubro</label>
                                     <input data-requerido="true" class="form-control" type="text" id="familia"
                                         placeholder="Proveedor">
                                 </div>
@@ -107,7 +120,7 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
                                             <th class="text-center">Utilidad</th>
                                             <th class="text-center">Stock</th>
                                             <th class="text-center">Min</th>
-                                            <th class="text-center">Familia</th>
+                                            <th class="text-center">Rubro</th>
                                             <th class="text-center" style="width: 10em;">Opciones</th>
                                         </tr>
                                         </thead>

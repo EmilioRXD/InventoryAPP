@@ -20,7 +20,12 @@ var $mostrar_resultados = $("p#mostrar_resultados"),
     ayudante_cantidad = undefined,
     numero_total_productos = undefined,
     esta_buscando = undefined,
-    busqueda_anterior = undefined;
+    busqueda_anterior = undefined,
+    pCompra = 0,
+    pUtilidad = 0,
+    pPorcentaje = 0,
+    npCompra = 0,
+    pVenta = 0;
 
 var delay = (function () {
     var timer = 0;
@@ -183,6 +188,33 @@ function buscar_producto(busqueda) {
 
 
 function escuchar_elementos() {
+
+    $("#porcentaje_utilidad").keyup(function () {
+        pCompra = $("#precio_compra").val();
+        npCompra = parseFloat(pCompra);
+        pUtilidad   = $("#porcentaje_utilidad").val();
+
+        pUtilidad /= 100;
+        pPorcentaje = npCompra * pUtilidad;
+
+        pVenta = pPorcentaje + npCompra;
+            
+        $("#precio_venta").val((pVenta).toFixed(2));
+    })
+
+    $("#chkPorcentaje").change(function() {
+        if ($("#chkPorcentaje").is(':checked')){
+            $("#precio_venta").prop('disabled', true);
+            $("#precio_venta").parent().addClass("col-sm-6").removeClass("col-sm-12");
+            $("#porcentaje_utilidad").parent().addClass("col-sm-6").show();
+        } else {
+            $("#precio_venta").prop('disabled', false).val("");
+            $("#precio_venta").parent().removeClass("col-sm-6").addClass("col-sm-12");
+            $("#porcentaje_utilidad").parent().removeClass("col-sm-6").hide();
+            $("#porcentaje_utilidad").val("");
+        }
+    });
+
     $("input#buscar_producto, input#nombre_producto").keyup(function (evento) {
         if (evento.keyCode >= 64 && evento.keyCode <= 90) this.value = this.value.toUpperCase();
     });

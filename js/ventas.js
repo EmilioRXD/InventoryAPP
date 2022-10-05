@@ -14,6 +14,7 @@ var productos_vender = [],
     ayudante_posicion = 0,
     puede_salir = true,
     total = 0,
+    total10 = 0,
     intervalo_ayudante_nprogress,
     TECLA_F1 = 112,
     TECLA_F2 = 113,
@@ -263,6 +264,7 @@ function dibujar_productos() {
     $("#contenedor_total").text("Bs. " + (totalBs).toFixed(2)).parent().show();
     $("#contenedor_total_verde").text("$ " + ayudante_total).parent().show();
     total = ayudante_total;
+    total10 = total + (total * 0.10);
 }
 
 
@@ -271,7 +273,9 @@ function preparar_para_realizar_venta() {
     if (productos_vender.length > 0) {
         $("#modal_procesar_venta").modal("show");
         $("#contenedor_total_modal").text("Bs. " + (totalBs).toFixed(2)).parent().show();
-        $("#contenedor_total_modal_verde").text("$ " + total).parent().show();
+        $("#contenedor_total_modal_10").parent().hide();
+        $("#contenedor_total_modal_verde").text("$ " + (total).toFixed(2)).parent().show();
+        $("#contenedor_total_modal_verde_10").parent().hide();
     }
 }
 function deshabilita_para_venta() {
@@ -405,9 +409,19 @@ function escuchar_elementos() {
         $("#chkEfectivoExacto").prop('checked', false);
         $(".credito").show();
         $(".credito_input").addClass("hidden").val("");
+        $("#contenedor_total_modal").text("Bs. " + (totalBs).toFixed(2)).parent().show();
+        $("#contenedor_total_modal_10").parent().hide();
+        $("#contenedor_total_modal_verde").text("$ " + (total).toFixed(2)).parent().show();
+        $("#contenedor_total_modal_verde_10").parent().hide();
         if ($("#metodo_pago").val().trim() == 0) {
             dolar = 1;
         } else if ($("#metodo_pago").val().trim() == 4){
+            
+                $("#contenedor_total_modal").text("Bs. " + (totalBs + (totalBs * 0.10)).toFixed(2)).parent().show();
+                $("#contenedor_total_modal_10").text("Bs. " + (totalBs).toFixed(2)).parent().show();
+                $("#contenedor_total_modal_verde").text("$ " + (total10).toFixed(2)).parent().show();
+                $("#contenedor_total_modal_verde_10").text("$ " + (total).toFixed(2)).parent().show();
+
             $(".credito").hide();
             $(".credito_input").removeClass("hidden");
             $("#chkEfectivoExacto").prop('checked', true);
@@ -510,7 +524,7 @@ function escuchar_elementos() {
         if (cambio >= 0 && !isNaN(pago) && valor != 4) {
             realizar_venta(productos_vender, total, totalBs, precioVerde, metodo_pago, cambio, $("#imprimir_ticket").prop("checked"));
         } else if (cambio >= 0 && !isNaN(pago) && valor == 4 && nombre_cliente != ""){
-            realizar_credito(nombre_cliente, numero_cliente, productos_vender, total, metodo_pago, cambio, $("#imprimir_ticket").prop("checked"));
+            realizar_credito(nombre_cliente, numero_cliente, productos_vender, total10, metodo_pago, cambio, $("#imprimir_ticket").prop("checked"));
         } else {
             $("#nombre_cliente").animateCss("shake");
             $("#nombre_cliente").parent().addClass('has-error');

@@ -81,10 +81,12 @@
                 </div>
                 <div class="modal-body">
                     <div class="col-sm-6 text-center">
-                        <h2 hidden="hidden"><strong>Total: </strong><span id="contenedor_total_modal"></span></h2>
+                        <h4 style="margin: 0 auto !important;" hidden="hidden">10% + <span id="contenedor_total_modal_10"></h4>
+                        <h2 style="margin: 0 auto !important;" hidden="hidden"><strong>Total: </strong><span id="contenedor_total_modal"></span></h2>
                     </div>
                     <div class="col-sm-6 text-center">
-                        <h2 hidden="hidden"><strong>Total: </strong><span id="contenedor_total_modal_verde"></span></h2><br>
+                        <h4 style="margin: 0 auto !important;" hidden="hidden">10% + <span id="contenedor_total_modal_verde_10"></h4>
+                        <h2 style="margin: 0 auto !important;" hidden="hidden"><strong>Total: </strong><span id="contenedor_total_modal_verde"></span></h2><br>
                     </div>
                     <div class="row">
                         <div class="col-xs-12">

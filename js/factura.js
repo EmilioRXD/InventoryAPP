@@ -23,7 +23,7 @@ var $contenedor_productos = $("#cuerpo_tabla_productos"),
     ci = 0,
     telefono = 0;
 
-var precioVerde = $("#dolar").text();
+var precioVerde = $("#dolar").text();g
 
 function Producto(numero, nombre) {
  this.numero = numero;

@@ -14,6 +14,7 @@ var $contenedor_productos = $("#cuerpo_tabla_productos"),
     un_dia_en_milisegundos = (24 * 60 * 60 * 1000),
     ayudante_total = 0,
     ayudante_utilidad = 0.0,
+    numero_total_productos = undefined,
     OFFSET = 0,
     LIMITE = 17,
     deuda = 0,
@@ -23,7 +24,7 @@ var $contenedor_productos = $("#cuerpo_tabla_productos"),
     ci = 0,
     telefono = 0;
 
-var precioVerde = $("#dolar").text();g
+var precioVerde = $("#dolar").text();
 
 function Producto(numero, nombre) {
  this.numero = numero;
@@ -73,14 +74,15 @@ function consultar_compra() {
      offset: OFFSET
  }, function (respuesta) {
      respuesta = JSON.parse(respuesta);
-     console.log(respuesta);
      if (respuesta !== false) {
          dibuja_tabla_creditos(respuesta);
+         consultar_numero_total_productos()
      } else {
          //Manejar error o respuesta
      }
  });
 }
+
 
 function dame_posicion_venta(ventas, numero_credito) {
  for (var i = ventas.length - 1; i >= 0; i--) {
@@ -121,22 +123,14 @@ function escuchar_elementos(){
         } else {
             OFFSET = 0;
         }
-        if (esta_buscando === true) {
-            buscar_producto($("#buscar_producto").val());
-        } else {
-            dibuja_tabla_creditos();
-        }
+        consultar_compra();
     });
 
     $(document).on("click", "#cargar_productos_antiguos", function (evento) {
         if (OFFSET + LIMITE < numero_total_productos) {
             OFFSET = OFFSET + LIMITE;
         }
-        if (esta_buscando === true) {
-            buscar_producto($("#buscar_producto").val());
-        } else {
-            dibuja_tabla_creditos();
-        }
+        consultar_compra();
     });
 }
 
@@ -175,7 +169,7 @@ function dibuja_tabla_creditos(ventas) {
         .find("thead")
         .show();
 
-    var nombre, numero, total, total_bs;
+    var nombre, numero, precio, total, precio_v, total_p;
     for (var i = 0; i < ventas.length; i++) {
         $("#numero_venta").html(ventas[i].numero_venta);
         $("#fecha").html(ventas[i].fecha);
@@ -186,8 +180,7 @@ function dibuja_tabla_creditos(ventas) {
             precio   = ventas[i].precio_venta,
             total    = ventas[i].total,
             precio_v = precio*precioVerde,
-            tatal_p  = precio_v * numero;
-        console.log(numero);
+            total_p  = precio_v * numero;
         $contenedor_productos
             .append(
                 $('<tr>')
@@ -196,7 +189,7 @@ function dibuja_tabla_creditos(ventas) {
                         $('<td style="word-wrap: break-word; white-space: normal;">').html(nombre),
                         $('<td class="text-right">').html("$ " + total/numero),
                         $('<td class="text-right">').html("Bs. " + (precio*precioVerde).toFixed(2)),
-                        $('<td class="text-right">').html("Bs. " + (tatal_p).toFixed(2))
+                        $('<td class="text-right">').html("Bs. " + (total_p).toFixed(2))
                     )
             );
     }

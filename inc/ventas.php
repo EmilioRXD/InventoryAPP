@@ -7,7 +7,7 @@
             <section class="content">
                 <div class="row">
                     <div class="col-sm-2"></div>
-                    <div class="col-sm-8" id="contenedor_venta">
+                    <div class="col-sm-8">
                         <div class="box box-primary">
                             <div class="box-header with-border">
                                 
@@ -152,8 +152,8 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-xs-12" style="margin: 1em auto;">
-                            <button id="realizar_factura" class="form-control btn btn-info">Realizar Factura</button>
+                        <div hidden="hidden" class="col-xs-12" style="margin: 1em auto;">
+                            <a id="realizar_factura" class="form-control btn btn-info" href="factura">Generar Nota de Entrega <i class="fa fa-file-pdf-o"></i></a>
                         </div>
                     </div>
                     <div class="row">

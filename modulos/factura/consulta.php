@@ -1,15 +1,14 @@
 <?php
-
-    function consultar_compra($limite, $offset)
+    function consultar_numero_total_productos()
     {
         global $base_de_datos;
-        require_once "../inventario/inventario.php";
         $numero_venta = ultimo_numero_de_venta();
-        $sentencia = $base_de_datos->prepare("SELECT * FROM ventas WHERE numero_venta = ? ORDER BY fecha DESC LIMIT ? OFFSET ?;");
-        $sentencia->execute([$numero_venta, $limite, $offset]);
-        return $sentencia->fetchAll();
+        $sentencia = $base_de_datos->prepare("SELECT count(codigo_producto) AS count FROM ventas WHERE numero_venta = ?;");
+        $sentencia->execute([$numero_venta]);
+        $fila = $sentencia->fetch();
+        if ($fila === FALSE) return;
+        return $fila["count"];
     }
-
     function ultimo_numero_de_venta()
     {
         global $base_de_datos;

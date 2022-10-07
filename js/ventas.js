@@ -329,10 +329,12 @@ function realizar_venta(productos, total, totalBs, precioVerde, metodo_pago, cam
                 .removeClass('btn-warning btn-info')
                 .addClass('btn-success');
             // $("#modal_procesar_venta").modal("hide");
-            // cancelar_venta();
+
+            cancelar_venta();
             // $("#codigo_producto").focus();
-            // $("#pago_usuario").val("");
-            // $("#contenedor_cambio").parent().hide();
+            $("#realizar_factura").parent().show();
+            $("#pago_usuario").val("");
+            $("#contenedor_cambio").parent().hide();
         } else {
             console.log("Error, la respuesta es:", respuesta);
         }
@@ -403,10 +405,6 @@ function cancelar_venta() {
 
 
 function escuchar_elementos() {
-    $("#realizar_factura").click( function () {
-        $("#contenedor_venta").hide();
-    });
-
     $("#metodo_pago").change(function () {
         $(".contenedor_cambio").parent().hide();
         $("#pago_usuario").val("").prop('disabled', false);

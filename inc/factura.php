@@ -1,10 +1,5 @@
 <body class="<?php echo THEME ?> sidebar-collapse sidebar-open">
     <div class="wrapper" style="background-color: #ecf0f5;">
-
-        <?php
-        if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
-        ?>
-
         <div class="content-wrapper" style="margin: 0;" id="quitar">
             <!-- Main content -->
             <section class="content">
@@ -12,8 +7,13 @@
                     <div class="col-sm-12">
                         <div class="box box-default">
                             <div class="box-header with-border hidden-print">
-                                <button class="btn btn-info form-control" id="generar_reporte">Generar Nota de Entrega <i class="fa fa-file-pdf-o"></i>
-                                </button>
+                                <div class="col-sm-6">
+                                    <a href="ventas" class="btn btn-success btn-block"><i class="fa fa-shopping-cart"></i> Regresar a Ventas</a>
+                                </div>
+                                <div class="col-sm-6">
+                                    <button class="btn btn-warning btn-block" id="generar_reporte">Generar Nota de Entrega <i class="fa fa-file-pdf-o"></i>
+                                    </button>
+                                </div>
                             </div>
                             <div class="box-body">
                                 <div class="table-responsive">
@@ -90,7 +90,7 @@
                                     </table>
                                 </div>    
                             </div><!-- /.box-body -->
-                            <div class="box-footer">
+                            <div class="box-footer hidden-print">
                                 <div class="btn-group btn-group-justified">
                                     <div class="btn-group">
                                         <button id="cargar_productos_nuevos" type="button" class="btn btn-success"><i

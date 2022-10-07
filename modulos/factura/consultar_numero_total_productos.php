@@ -5,7 +5,7 @@ if ( !defined( "RAIZ" ) )
 	define( "RAIZ", dirname( dirname( dirname( __FILE__ ) ) ) );
 }
 require_once RAIZ . "/modulos/db.php";
-require_once RAIZ . "/modulos/factura/factura.php";
+require_once RAIZ . "/modulos/factura/consulta.php";
 $cantidad = consultar_numero_total_productos();
 echo json_encode( $cantidad );
 ?>

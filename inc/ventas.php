@@ -7,7 +7,7 @@
             <section class="content">
                 <div class="row">
                     <div class="col-sm-2"></div>
-                    <div class="col-sm-8">
+                    <div class="col-sm-8" id="contenedor_venta">
                         <div class="box box-primary">
                             <div class="box-header with-border">
                                 
@@ -70,6 +70,13 @@
                     <!-- /left column -->
 
                 </div><!-- /.row -->
+                <div class="row">
+                    <div class="col-sm-2"></div>
+                    <div class="col-sm-8" id="contenedor_factura">
+                        
+                    </div>
+                    <div class="col-sm-2"></div>
+                </div>
             </section><!-- /.content -->
         </div>
     <div id="modal_procesar_venta" class="modal fade" role="dialog">
@@ -142,6 +149,11 @@
                             <div hidden="hidden" class="alert">
                                 <span id="mostrar_resultados_eliminar"></span>
                             </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-xs-12" style="margin: 1em auto;">
+                            <button id="realizar_factura" class="form-control btn btn-info">Realizar Factura</button>
                         </div>
                     </div>
                     <div class="row">

@@ -1,0 +1,15 @@
+.factura-header {
+    border: solid 1px black;
+}
+.factura-borde {
+    background: #000;
+    height: 1px;
+    width: 100%;
+    margin-top: .5em;
+}
+th {
+    padding: .2em .4em;
+}
+td {
+    padding: 0 .4em;
+}

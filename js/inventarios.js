@@ -13,7 +13,7 @@
 var $mostrar_resultados = $("p#mostrar_resultados"),
     $contenedor_productos = $("#cuerpo_tabla_productos"),
     OFFSET = 0,
-    LIMITE = 7,
+    LIMITE = 2,
     id_temporal_ayudante = undefined,
     esta_editando = undefined,
     tooltip_esta_mostrado = undefined,

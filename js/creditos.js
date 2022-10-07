@@ -372,7 +372,7 @@ function consultar_credito(id_temporal_ayudante) {
         respuesta = JSON.parse(respuesta);
         $("#contenedor_total").text("Bs. " + (respuesta.total*precioVerde).toFixed(2));
         $("#contenedor_total_verde").text("$ " + respuesta.total);
-        deuda = respuesta.total
+        deuda = respuesta.total;
     });
 }
 

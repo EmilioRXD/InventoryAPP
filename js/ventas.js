@@ -327,12 +327,12 @@ function realizar_venta(productos, total, totalBs, precioVerde, metodo_pago, cam
                 )
                 .append(" ¡Venta correcta!")
                 .removeClass('btn-warning btn-info')
-                .addClass('btn-info');
-            $("#modal_procesar_venta").modal("hide");
-            cancelar_venta();
-            $("#codigo_producto").focus();
-            $("#pago_usuario").val("");
-            $("#contenedor_cambio").parent().hide();
+                .addClass('btn-success');
+            // $("#modal_procesar_venta").modal("hide");
+            // cancelar_venta();
+            // $("#codigo_producto").focus();
+            // $("#pago_usuario").val("");
+            // $("#contenedor_cambio").parent().hide();
         } else {
             console.log("Error, la respuesta es:", respuesta);
         }
@@ -403,6 +403,10 @@ function cancelar_venta() {
 
 
 function escuchar_elementos() {
+    $("#realizar_factura").click( function () {
+        $("#contenedor_venta").hide();
+    });
+
     $("#metodo_pago").change(function () {
         $(".contenedor_cambio").parent().hide();
         $("#pago_usuario").val("").prop('disabled', false);
@@ -511,14 +515,14 @@ function escuchar_elementos() {
             1: 'Bs. Efectivo',
             2: 'Bs. Tarjeta',
             3: 'Bs. Pago Movil',
-            4: 'Credito',
+            4: 'Crédito',
         }
 
         var metodo_pago     = switch_metodo_pago[$("#metodo_pago").val().trim()],
             nombre_cliente  = $("#nombre_cliente").val(),
             numero_cliente  = $("#numero_cliente").val(),
             valor           = $("#metodo_pago").val().trim();
-
+            
         var pago = $("#pago_usuario").val(),
             cambio = pago - total;
         if (cambio >= 0 && !isNaN(pago) && valor != 4) {

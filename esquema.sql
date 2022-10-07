@@ -196,6 +196,7 @@ CREATE TABLE `ventas` (
   `nombre_producto` text NOT NULL,
   `total` decimal(11,2) NOT NULL,
   `total_bs` decimal(11,2) NOT NULL,
+  `precio_venta` decimal(11,2) NOT NULL,
   `precio_verde` decimal(11,2) NOT NULL,
   `fecha` datetime NOT NULL,
   `numero_productos` decimal(11,2) NOT NULL,

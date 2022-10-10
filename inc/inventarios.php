@@ -42,8 +42,8 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
                                             placeholder="Precio de venta">
                                     </div>
                                     <div class="form-group" hidden="hidden">
-                                        <label for="precio_venta">Porcentaje de utilidad</label>
-                                        <input data-toggle="tooltip" data-placement="top" data-requerido="true" class="form-control" type="number"
+                                        <label for="porcentaje_utilidad">Porcentaje de utilidad</label>
+                                        <input data-toggle="tooltip" class="form-control" type="number"
                                             id="porcentaje_utilidad" placeholder="Porcentaje de utilidad">
                                     </div>
                                     <div class="credito checkbox col-sm-12">

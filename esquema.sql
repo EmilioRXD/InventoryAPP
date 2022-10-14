@@ -1,6 +1,6 @@
 -- MariaDB dump 10.19  Distrib 10.4.20-MariaDB, for Win64 (AMD64)
 --
--- Host: localhost    Database: okventa_by_parzibyte
+-- Host: localhost    Database: inventoryapp
 -- ------------------------------------------------------
 -- Server version	10.4.20-MariaDB
 

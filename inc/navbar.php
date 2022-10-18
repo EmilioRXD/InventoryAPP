@@ -96,10 +96,10 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
                     <li><a href="./usuarios"><i class="fa fa-user"></i> Usuarios</a></li>'
                     
                 :  '<li class="treeview">
-                        <a href="./creditos"><i class="fa fa-shopping-cart"></i> Ventas</a>
+                        <a href="./ventas"><i class="fa fa-shopping-cart"></i> Ventas</a>
                     </li>
                     <li class="treeview">
-                        <a href="./ventas"><i class="fa fa-credit-card"></i> Credito</a>
+                        <a href="./creditos"><i class="fa fa-credit-card"></i> Créditos</a>
                     </li>
                     <li class="treeview">
                         <a href="./gastos"><i class="fa fa-calculator"></i> Gastos</a>
@@ -115,7 +115,7 @@ if (!isset($_SESSION)) exit("<script>window.location.href = '../';</script>");
                         </a>
                         <ul class="treeview-menu">
                         <li><a href="./reportes-ventas">Ventas</a></li>
-                        <li><a href="./reportes-gastos">Gastos</a></li>
+                        <li><a href="./reportes-creditos">Creditos</a></li>
                         </ul>
                     </li>';
         ?>

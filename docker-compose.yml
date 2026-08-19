@@ -31,7 +31,7 @@ services:
     # ports:           # <-- Comentado si Traefik se encarga del enrutamiento
     #   - 8082:80
     volumes:
-      - ./web:/var/www/html # <-- Ajustado para montar solo el código fuente
+      - .:/var/www/html # <-- DocumentRoot = raíz del repo (index.php, modulos, inc, public)
     depends_on:
       db:
         condition: service_healthy # <-- Espera a que MariaDB acepte conexiones

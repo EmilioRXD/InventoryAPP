@@ -1,0 +1,35 @@
+services:
+  db:
+    image: mariadb:10.4
+    container_name: invapp-db
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootsecret}
+      MYSQL_DATABASE: inventoryapp
+      MYSQL_USER: ${MYSQL_USER:-okventa}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-okventa123}
+    ports:
+      - "3307:3306"
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./esquema.sql:/docker-entrypoint-initdb.d/01-esquema.sql:ro
+      - ./db/init/02-reset-admin.sql:/docker-entrypoint-initdb.d/02-reset-admin.sql:ro
+
+  web:
+    build: ./web
+    container_name: invapp-web
+    restart: unless-stopped
+    environment:
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_USER: ${MYSQL_USER:-okventa}
+      DB_PASS: ${MYSQL_PASSWORD:-okventa123}
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      - db
+
+volumes:
+  db_data:

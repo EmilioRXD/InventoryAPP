@@ -1,1 +1,5 @@
 vendor
+.env
+/impresora.ini
+/tema.txt
+/datos_empresa.txt

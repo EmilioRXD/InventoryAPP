@@ -1,0 +1,43 @@
+services:
+  db:
+    image: mariadb:10.4
+    restart: unless-stopped
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootsecret}
+      MYSQL_DATABASE: inventoryapp
+      MYSQL_USER: ${MYSQL_USER:-okventa}
+      MYSQL_PASSWORD: ${MYSQL_PASSWORD:-okventa123}
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./esquema.sql:/docker-entrypoint-initdb.d/01-esquema.sql:ro
+      - ./db/init/02-reset-admin.sql:/docker-entrypoint-initdb.d/02-reset-admin.sql:ro
+    networks:
+      - dokploy-network
+    healthcheck:
+      test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  web:
+    build: ./web
+    restart: unless-stopped
+    environment:
+      DB_HOST: db
+      DB_PORT: "3306"
+      DB_USER: ${MYSQL_USER:-okventa}
+      DB_PASS: ${MYSQL_PASSWORD:-okventa123}
+    volumes:
+      - .:/var/www/html
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - dokploy-network
+
+volumes:
+  db_data:
+
+networks:
+  dokploy-network:
+    external: true

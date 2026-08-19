@@ -12,6 +12,12 @@ services:
       - db_data:/var/lib/mysql
       - ./esquema.sql:/docker-entrypoint-initdb.d/01-esquema.sql:ro
       - ./db/init/02-reset-admin.sql:/docker-entrypoint-initdb.d/02-reset-admin.sql:ro
+    networks:
+      - internal-net # Red exclusiva para DB y Web
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      timeout: 20s
+      retries: 10
 
   web:
     build: ./web
@@ -22,12 +28,34 @@ services:
       DB_PORT: "3306"
       DB_USER: ${MYSQL_USER:-okventa}
       DB_PASS: ${MYSQL_PASSWORD:-okventa123}
-    ports:
-      - "8082:80"
+    # ports:           # <-- Comentado si Traefik se encarga del enrutamiento
+    #   - 8082:80
     volumes:
-      - .:/var/www/html
+      - ./web:/var/www/html # <-- Ajustado para montar solo el código fuente
     depends_on:
-      - db
+      db:
+        condition: service_healthy # <-- Espera a que MariaDB acepte conexiones
+    labels:
+      - traefik.docker.network=dokploy-network
+      - traefik.http.routers.invetoryapp-main-0orxoa-31-web.rule=Host(`inventoryapp.scape.nexus`)
+      - traefik.http.routers.invetoryapp-main-0orxoa-31-web.entrypoints=web
+      - traefik.http.services.invetoryapp-main-0orxoa-31-web.loadbalancer.server.port=80
+      - traefik.http.routers.invetoryapp-main-0orxoa-31-web.service=invetoryapp-main-0orxoa-31-web
+      - traefik.http.routers.invetoryapp-main-0orxoa-31-web.middlewares=redirect-to-https@file
+      - traefik.http.routers.invetoryapp-main-0orxoa-31-websecure.rule=Host(`inventoryapp.scape.nexus`)
+      - traefik.http.routers.invetoryapp-main-0orxoa-31-websecure.entrypoints=websecure
+      - traefik.http.services.invetoryapp-main-0orxoa-31-websecure.loadbalancer.server.port=80
+      - traefik.http.routers.invetoryapp-main-0orxoa-31-websecure.service=invetoryapp-main-0orxoa-31-websecure
+      - traefik.http.routers.invetoryapp-main-0orxoa-31-websecure.tls.certresolver=letsencrypt
+      - traefik.enable=true
+    networks:
+      - dokploy-network
+      - internal-net # <-- Conecta con la DB y con Traefik al mismo tiempo
 
 volumes:
   db_data:
+
+networks:
+  dokploy-network:
+    external: true
+  internal-net: # <-- Red interna creada por compose para aislar la comunicación DB <-> Web

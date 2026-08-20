@@ -1,7 +1,7 @@
 services:
   db:
     image: mariadb:10.4
-    container_name: invapp-db
+    container_name: invapp-dev-db
     restart: unless-stopped
     environment:
       MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD:-rootsecret}
@@ -21,7 +21,7 @@ services:
 
   web:
     build: ./web
-    container_name: invapp-web
+    container_name: invapp-dev-web
     restart: unless-stopped
     environment:
       DB_HOST: db
@@ -37,16 +37,16 @@ services:
         condition: service_healthy # <-- Espera a que MariaDB acepte conexiones
     labels:
       - traefik.docker.network=dokploy-network
-      - traefik.http.routers.invetoryapp-main-0orxoa-31-web.rule=Host(`inventoryapp.scape.nexus`)
-      - traefik.http.routers.invetoryapp-main-0orxoa-31-web.entrypoints=web
-      - traefik.http.services.invetoryapp-main-0orxoa-31-web.loadbalancer.server.port=80
-      - traefik.http.routers.invetoryapp-main-0orxoa-31-web.service=invetoryapp-main-0orxoa-31-web
-      - traefik.http.routers.invetoryapp-main-0orxoa-31-web.middlewares=redirect-to-https@file
-      - traefik.http.routers.invetoryapp-main-0orxoa-31-websecure.rule=Host(`inventoryapp.scape.nexus`)
-      - traefik.http.routers.invetoryapp-main-0orxoa-31-websecure.entrypoints=websecure
-      - traefik.http.services.invetoryapp-main-0orxoa-31-websecure.loadbalancer.server.port=80
-      - traefik.http.routers.invetoryapp-main-0orxoa-31-websecure.service=invetoryapp-main-0orxoa-31-websecure
-      - traefik.http.routers.invetoryapp-main-0orxoa-31-websecure.tls.certresolver=letsencrypt
+      - traefik.http.routers.invetoryapp-dev-0orxoa-31-web.rule=Host(`dev-inventoryapp.scape.nexus`)
+      - traefik.http.routers.invetoryapp-dev-0orxoa-31-web.entrypoints=web
+      - traefik.http.services.invetoryapp-dev-0orxoa-31-web.loadbalancer.server.port=80
+      - traefik.http.routers.invetoryapp-dev-0orxoa-31-web.service=invetoryapp-dev-0orxoa-31-web
+      - traefik.http.routers.invetoryapp-dev-0orxoa-31-web.middlewares=redirect-to-https@file
+      - traefik.http.routers.invetoryapp-dev-0orxoa-31-websecure.rule=Host(`dev-inventoryapp.scape.nexus`)
+      - traefik.http.routers.invetoryapp-dev-0orxoa-31-websecure.entrypoints=websecure
+      - traefik.http.services.invetoryapp-dev-0orxoa-31-websecure.loadbalancer.server.port=80
+      - traefik.http.routers.invetoryapp-dev-0orxoa-31-websecure.service=invetoryapp-dev-0orxoa-31-websecure
+      - traefik.http.routers.invetoryapp-dev-0orxoa-31-websecure.tls.certresolver=letsencrypt
       - traefik.enable=true
     networks:
       - dokploy-network

@@ -11,7 +11,7 @@ inicia_sesion_segura();
 $productos 		= $_POST["productos"];
 $productos 		= json_decode($productos);
 $nombre_cliente	= $_POST["nombre_cliente"];
-$numero_cliente	= $_POST["numero_cliente"];
+$numero_cliente	= !empty($_POST["numero_cliente"]) ? $_POST["numero_cliente"] : 0;
 $total          = $_POST["total"];
 $cambio 		= $_POST["cambio"];
 $metodo_pago 	= $_POST["metodo_pago"];

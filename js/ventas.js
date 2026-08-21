@@ -518,7 +518,7 @@ function escuchar_elementos() {
 
         var metodo_pago     = switch_metodo_pago[$("#metodo_pago").val().trim()],
             nombre_cliente  = $("#nombre_cliente").val(),
-            numero_cliente  = $("#numero_cliente").val(),
+            numero_cliente  = $("#numero_cliente").val().trim() || 0,
             valor           = $("#metodo_pago").val().trim();
             
         var pago = $("#pago_usuario").val(),
